@@ -107,9 +107,71 @@
             line-height: 1.5;
         }
 
+        .records {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .panel {
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--panel);
+        }
+
+        .panel h2 {
+            margin: 0 0 14px;
+            font-size: 18px;
+            letter-spacing: 0;
+        }
+
+        .record-list {
+            display: grid;
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .record {
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+        }
+
+        .record:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .record strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .record span {
+            display: block;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .empty {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
         @media (max-width: 820px) {
             .grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .records {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -159,6 +221,57 @@
                 <article class="card">
                     <h2>Admin</h2>
                     <p>Use Django Admin for MVP data management.</p>
+                </article>
+            </section>
+
+            <section class="records" aria-label="Demo clinic records">
+                <article class="panel">
+                    <h2>Available Services</h2>
+                    {% if services %}
+                        <ul class="record-list">
+                            {% for service in services %}
+                                <li class="record">
+                                    <strong>{{ service.name }}</strong>
+                                    <span>{{ service.duration_minutes }} minutes</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="empty">No services available yet. Seed demo data or add services in Django Admin.</p>
+                    {% endif %}
+                </article>
+
+                <article class="panel">
+                    <h2>Professionals</h2>
+                    {% if professionals %}
+                        <ul class="record-list">
+                            {% for professional in professionals %}
+                                <li class="record">
+                                    <strong>{{ professional.full_name }}</strong>
+                                    <span>{{ professional.role|default:"Clinic professional" }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="empty">No professionals available yet. Seed demo data or add professionals in Django Admin.</p>
+                    {% endif %}
+                </article>
+
+                <article class="panel">
+                    <h2>Scheduled Appointments</h2>
+                    {% if appointments %}
+                        <ul class="record-list">
+                            {% for appointment in appointments %}
+                                <li class="record">
+                                    <strong>{{ appointment.service.name }}</strong>
+                                    <span>{{ appointment.scheduled_for|date:"M j, Y H:i" }}</span>
+                                    <span>{{ appointment.client.full_name }} with {{ appointment.professional.full_name }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="empty">No scheduled appointments available yet. Seed demo data or add appointments in Django Admin.</p>
+                    {% endif %}
                 </article>
             </section>
         </div>
