@@ -2,26 +2,28 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-001
+Task: CBM-002
 
 State: Local DONE
 
+## Starting Point
+
+CBM-001 is Remote DONE at commit `4796bc9`.
+
+`main` was clean and synced with `origin/main` before CBM-002 execution.
+
 ## What Was Done
 
-The MVP scope for Clinic Booking Mini was documented as an administrative appointment booking system for a fictitious aesthetic/dental clinic context.
+CBM-002 created the minimal Django MVP foundation:
 
-The documentation covers:
-
-- Required Discussion Gate answers.
-- Administrative-only safety boundary.
-- MVP entities.
-- Appointment statuses.
-- Service examples.
-- User flows.
-- Business rules.
-- Domain model.
-- Stack decision.
-- Operational status, backlog, and execution log.
+- `.gitignore`
+- `requirements.txt`
+- `manage.py`
+- `clinic_booking_mini` Django project package
+- `scheduling` MVP app package
+- SQLite default local configuration
+- Operational documentation updates
+- Local verification with Django 5.2.14
 
 ## Important Boundary
 
@@ -29,18 +31,24 @@ This project is not a medical records system.
 
 Do not add diagnosis, prescription, treatment records, clinical notes, anamnesis, imaging, medical documents, real patient data, or sensitive health data.
 
+CBM-002 does not include CRUD, business models, templates, authentication, payments, messaging integrations, Docker, deployment, or production operations.
+
 ## Current State
 
-- CBM-001 is in Local DONE.
+- CBM-002 is in Local DONE.
 - READY is empty.
-- Local DONE is declared for CBM-001.
-- Remote DONE is not declared.
-- A controlled local commit is approved for the CBM-001 documentation baseline.
-- No push has been made.
-- CBM-002 has not been opened.
+- CBM-002 Local DONE is declared.
+- CBM-002 Remote DONE is not declared.
+- A controlled local commit is approved for the CBM-002 Django foundation.
+- No push has been made for CBM-002.
+- CBM-003 has not been opened.
+
+## Verification
+
+`python -m django --version` reports Django 5.2.14.
+
+`python manage.py check` reports no issues.
 
 ## Suggested Next Review
 
-Review whether the MVP scope is acceptable for a later implementation task using Python, Django, SQLite, Django templates, and basic CSS.
-
-Implementation must wait for explicit approval from the Trigger.
+Review the controlled commit evidence before any future Remote DONE or push authorization.

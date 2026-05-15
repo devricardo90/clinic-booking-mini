@@ -2,52 +2,77 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-001
+Task: CBM-002
 
 State: Local DONE
 
 READY:
 
-Local DONE: declared for CBM-001
+CBM-001 Local DONE: declared
 
-Remote DONE: not declared
+CBM-001 Remote DONE: declared at commit `4796bc9`
+
+CBM-002 Local DONE: declared
+
+CBM-002 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-001 documents the MVP scope, business rules, user flows, domain model, stack decision, and operational tracking files.
+CBM-002 creates the minimal executable Django foundation for the Clinic Booking Mini MVP.
+
+Allowed scope:
+
+- `.gitignore`
+- `requirements.txt` with `Django>=5.2,<5.3`
+- `manage.py`
+- Django project package `clinic_booking_mini`
+- MVP app package `scheduling`
+- SQLite default local configuration
+- Operational documentation updates
+- Verification commands
 
 ## Execution Boundary
 
 Allowed:
 
-- Documentation files only.
-- Git initialization if the folder is not already a Git repository.
+- Minimal Django project foundation files.
+- Empty Django app shell for `scheduling`.
+- Local-development settings.
+- SQLite default database configuration.
+- Operational documentation updates.
 
 Blocked:
 
-- Django installation.
-- Python files.
-- App code.
-- Database migrations.
-- UI.
-- Dependencies.
-- Virtual environment.
-- Docker files.
+- Client CRUD.
+- Service CRUD.
+- Professional CRUD.
+- Appointment CRUD.
+- Business models beyond empty Django baseline files.
+- Templates.
+- CSS or UI polish.
 - Authentication.
 - Payment flow.
-- WhatsApp integration.
-- Medical or prontuary features.
-- Real personal or health data.
+- WhatsApp or messaging integration.
+- Docker.
+- Deployment.
+- Real patient data.
+- Medical records, diagnosis, prescriptions, treatment notes, anamnesis, imaging, or sensitive health data.
 - Commit.
 - Push.
-- Opening CBM-002 automatically.
+- Opening CBM-003 automatically.
 
 ## Local Done State
 
-CBM-001 was approved for Local DONE by the Trigger.
+CBM-002 was approved for Local DONE and controlled commit by the Trigger.
 
 READY remains empty.
 
-Remote DONE is not declared.
+CBM-003 remains not started and not opened.
 
-CBM-002 remains not started and not opened.
+## Verification State
+
+The declared Django dependency was installed in the user Python site from `requirements.txt` to run the approved local verification commands.
+
+`python -m django --version` reports Django 5.2.14.
+
+`python manage.py check` reports no issues.
