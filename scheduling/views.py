@@ -1,1 +1,5 @@
-# Views are intentionally deferred until UI or endpoint scope is approved.
+from django.shortcuts import render
+
+
+def home(request):
+    return render(request, "scheduling/home.html")
