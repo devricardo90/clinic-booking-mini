@@ -2,28 +2,30 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-002
+Task: CBM-003
 
-State: Local DONE
+State: REVIEW
 
 ## Starting Point
 
 CBM-001 is Remote DONE at commit `4796bc9`.
 
-`main` was clean and synced with `origin/main` before CBM-002 execution.
+CBM-002 is Remote DONE at commit `20e91a3`.
+
+`main` was clean and synced with `origin/main` before CBM-003 execution.
 
 ## What Was Done
 
-CBM-002 created the minimal Django MVP foundation:
+CBM-003 adds the minimal administrative scheduling model foundation:
 
-- `.gitignore`
-- `requirements.txt`
-- `manage.py`
-- `clinic_booking_mini` Django project package
-- `scheduling` MVP app package
-- SQLite default local configuration
-- Operational documentation updates
-- Local verification with Django 5.2.14
+- `Client`
+- `Service`
+- `Professional`
+- `Appointment`
+- Appointment statuses limited to `SCHEDULED` and `CANCELED`
+- Initial local scheduling migration
+- Local migration applied successfully
+- Django system check passing
 
 ## Important Boundary
 
@@ -31,24 +33,18 @@ This project is not a medical records system.
 
 Do not add diagnosis, prescription, treatment records, clinical notes, anamnesis, imaging, medical documents, real patient data, or sensitive health data.
 
-CBM-002 does not include CRUD, business models, templates, authentication, payments, messaging integrations, Docker, deployment, or production operations.
+CBM-003 does not include CRUD, templates, views, forms, URLs, authentication, admin customization, APIs, integrations, Docker, deployment, or production operations.
 
 ## Current State
 
-- CBM-002 is in Local DONE.
+- CBM-003 is in REVIEW.
 - READY is empty.
-- CBM-002 Local DONE is declared.
-- CBM-002 Remote DONE is not declared.
-- A controlled local commit is approved for the CBM-002 Django foundation.
-- No push has been made for CBM-002.
-- CBM-003 has not been opened.
-
-## Verification
-
-`python -m django --version` reports Django 5.2.14.
-
-`python manage.py check` reports no issues.
+- CBM-003 Local DONE is not declared.
+- CBM-003 Remote DONE is not declared.
+- No commit has been made for CBM-003.
+- No push has been made for CBM-003.
+- CBM-004 has not been opened.
 
 ## Suggested Next Review
 
-Review the controlled commit evidence before any future Remote DONE or push authorization.
+Review the model definitions, generated migration, local migration result, Django check result, and Git evidence before approving CBM-003 for Local DONE and a controlled commit.

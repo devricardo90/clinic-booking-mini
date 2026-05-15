@@ -4,25 +4,27 @@ Project: Clinic Booking Mini
 
 Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runtime:latest`
 
-Current item: CBM-002
+Current item: CBM-003
 
-Current state: Local DONE
+Current state: REVIEW
 
 READY:
 
-CBM-001 Local DONE: declared
-
 CBM-001 Remote DONE: declared at commit `4796bc9`
 
-CBM-002 Local DONE: declared
+CBM-002 Remote DONE: declared at commit `20e91a3`
 
-CBM-002 Remote DONE: not declared
+CBM-003 Local DONE: not declared
+
+CBM-003 Remote DONE: not declared
 
 ## Summary
 
-CBM-002 bootstraps the minimal executable Django foundation for the Clinic Booking Mini MVP.
+CBM-003 implements the minimal Django model foundation for administrative scheduling.
 
-The project remains local-development only and uses Django with SQLite default persistence. The `scheduling` app exists as an empty MVP app shell, with business models, CRUD, templates, authentication, payments, messaging integrations, deployment, and medical records explicitly deferred.
+The model scope is limited to `Client`, `Service`, `Professional`, and `Appointment`. Appointment status is limited to `SCHEDULED` and `CANCELED`.
+
+No CRUD, templates, views, forms, URLs, authentication, admin customization, APIs, integrations, real data, or sensitive health data are included.
 
 ## Privacy And Safety Boundary
 
@@ -32,15 +34,16 @@ The MVP must not include diagnosis, prescription, treatment records, clinical no
 
 Only fictitious administrative data is allowed for planning and later local MVP testing.
 
-## Local Done Notes
+## Review Notes
 
-CBM-002 was reviewed and approved for Local DONE with:
+CBM-003 should be reviewed for:
 
-- Minimal Django foundation only.
-- `Django>=5.2,<5.3` dependency declaration.
-- SQLite local configuration.
-- `scheduling` app registration.
-- No CRUD, business models, templates, authentication, payments, integrations, Docker, deployment, real patient data, or medical records.
-- Verification evidence completed before controlled commit authorization.
+- Minimal administrative scheduling models only.
+- Appointment statuses limited to `SCHEDULED` and `CANCELED`.
+- Local Django migration generated for `scheduling`.
+- Local migration applied successfully.
+- Django check passing.
+- No prohibited clinical or sensitive health fields.
+- No CRUD, UI, auth, admin customization, API, integrations, commit, push, or CBM-004 opening.
 
-CBM-003 remains not opened.
+CBM-004 remains not opened.

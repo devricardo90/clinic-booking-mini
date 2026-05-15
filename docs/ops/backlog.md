@@ -5,21 +5,22 @@ Project: Clinic Booking Mini
 ## REMOTE DONE
 
 - CBM-001: MVP scope documentation for administrative clinic booking.
-
-## LOCAL DONE
-
 - CBM-002: Bootstrap Django MVP Foundation.
+
+## REVIEW
+
+- CBM-003: Implement Core Scheduling Models.
 
 ## READY
 
 ## NOT STARTED
 
-- CBM-003: Not opened. Requires explicit Trigger approval.
+- CBM-004: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
-READY intentionally remains empty for CBM-002.
+READY intentionally remains empty for CBM-003.
 
-CBM-002 Local DONE is declared.
+CBM-003 Local DONE is not declared.
 
-CBM-002 Remote DONE is not declared.
+CBM-003 Remote DONE is not declared.
