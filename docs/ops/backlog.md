@@ -6,21 +6,22 @@ Project: Clinic Booking Mini
 
 - CBM-001: MVP scope documentation for administrative clinic booking.
 - CBM-002: Bootstrap Django MVP Foundation.
+- CBM-003: Implement Core Scheduling Models.
 
 ## REVIEW
 
-- CBM-003: Implement Core Scheduling Models.
+- CBM-004: Register Scheduling Models In Django Admin.
 
 ## READY
 
 ## NOT STARTED
 
-- CBM-004: Not opened. Requires explicit Trigger approval.
+- CBM-005: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
-READY intentionally remains empty for CBM-003.
+READY intentionally remains empty for CBM-004.
 
-CBM-003 Local DONE is not declared.
+CBM-004 Local DONE is not declared.
 
-CBM-003 Remote DONE is not declared.
+CBM-004 Remote DONE is not declared.

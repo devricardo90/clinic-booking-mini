@@ -4,28 +4,30 @@
 
 - CBM-001: Define MVP scope and operating boundaries for Clinic Booking Mini.
 - CBM-002: Bootstrap Django MVP Foundation.
+- CBM-003: Implement Core Scheduling Models.
 
 ## REVIEW
 
-- CBM-003: Implement Core Scheduling Models.
+- CBM-004: Register Scheduling Models In Django Admin.
 
 ## READY
 
 ## FUTURE
 
-- CBM-004: Not started and not opened. Requires explicit Trigger approval.
-- Add administrative CRUD only after explicit approval for a later task.
+- CBM-005: Not started and not opened. Requires explicit Trigger approval.
+- Add administrative CRUD views only after explicit approval for a later task.
 - Add templates and UI only after explicit approval for a later task.
 - Add tests for implemented behavior only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-003
+## BLOCKED / OUT OF SCOPE FOR CBM-004
 
-- Client CRUD, service CRUD, professional CRUD, and appointment CRUD.
+- Model changes.
+- Migrations.
+- CRUD views.
 - Templates, views, forms, URLs, APIs, or final UI.
-- Authentication and authorization workflows.
-- Admin customization.
+- Authentication and authorization changes.
 - Payment processing.
 - WhatsApp or external messaging integrations.
 - Docker and deployment.
-- Medical records, clinical notes, diagnosis, prescriptions, anamnesis, imaging, attachments, and medical documents.
-- Real patient data or sensitive health data.
+- Package or dependency changes.
+- Seed data, real patient data, or sensitive health data.
