@@ -4,40 +4,43 @@ Project: Clinic Booking Mini
 
 Last completed: CBM-013
 
-State: Remote DONE
+Current item: CBM-014
+
+State: REVIEW
 
 READY:
 
 CBM-001 through CBM-013: Remote DONE
 
-CBM-013 Local DONE: confirmed — commit 0e71035
+CBM-014 Local DONE: not declared
 
-CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main
+CBM-014 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-013 improves the clinic availability guards while staying on the existing schema.
+CBM-014 creates the official appointment lifecycle documentation for the MVP.
 
 Implemented scope:
 
-- Conflict guard now uses overlap-aware logic: rejects any new appointment whose time range
-  intersects an existing SCHEDULED appointment for the same professional.
-- Overlap condition: `existing_start < new_end AND existing_end > new_start`.
-- Only SCHEDULED appointments are checked; CANCELED slots are reusable.
-- Error message updated: "This time slot conflicts with an existing appointment for this professional."
-- Four new/updated tests cover: exact match, overlap start, canceled slot reuse, adjacent slot.
+- docs/product/appointment-lifecycle.md created.
+- States documented: SCHEDULED, CANCELED (current MVP); PENDING, REJECTED (planned future).
+- Transitions and prohibited transitions defined.
+- Availability impact per state documented.
+- Responsibility matrix defined.
+- MVP boundaries and future evolution notes documented.
 
 ## Validation State
 
-Validation evidence collected:
+Validation evidence to be collected before commit:
 
-- `python manage.py check` — PASS
-- `python manage.py test` — PASS (12 tests)
-- `python manage.py makemigrations --check --dry-run` — No changes detected
-- `git diff --check` — CRLF warnings only (Windows, expected)
+- git status --short --untracked-files=all
+- git diff --stat
+- git diff --check
+- Inspection of docs/product/appointment-lifecycle.md content.
 
 ## Explicit Limits
 
+- No code changes.
 - No model changes.
 - No migrations.
 - No BlockedSlot model.
@@ -48,12 +51,12 @@ Validation evidence collected:
 - No REST API.
 - No deployment.
 - No dependency changes.
-- Commit and push authorized by Trigger: 0e71035.
+- No commit or push without Trigger authorization.
 
-## End State
+## Review State
 
-CBM-013 is Remote DONE. Commit 0e71035 is on origin/main. HEAD and origin/main are synchronized.
+CBM-014 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
 
 READY remains empty.
 
-CBM-014 remains not started and not opened.
+CBM-015 remains not opened.

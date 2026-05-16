@@ -20,16 +20,18 @@ Project: Clinic Booking Mini
 
 ## REVIEW
 
+- CBM-014: Document Appointment Lifecycle.
+
 ## READY
 
 ## NOT STARTED
 
-- CBM-014: Not opened. Requires explicit Trigger approval.
+- CBM-015: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
 READY is empty. No new task has been opened.
 
-CBM-013 Local DONE: confirmed — commit 0e71035.
+CBM-014 Local DONE is not declared.
 
-CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main.
+CBM-014 Remote DONE is not declared.

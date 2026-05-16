@@ -6,37 +6,42 @@ Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runt
 
 Last completed: CBM-013
 
-Current state: Remote DONE
+Current item: CBM-014
+
+Current state: REVIEW
 
 READY:
 
 CBM-001 through CBM-013: Remote DONE
 
-CBM-013 Local DONE: confirmed — commit 0e71035
+CBM-014 Local DONE: not declared
 
-CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main
+CBM-014 Remote DONE: not declared
 
 ## Summary
 
-CBM-013 improves clinic availability guards without changing the database schema.
+CBM-014 creates the official appointment lifecycle documentation for the MVP, defining
+states, transitions, availability impact, responsibilities, and MVP boundaries before
+any future implementation.
 
 Implemented scope:
 
-- Conflict guard now detects overlapping time ranges, not just exact datetime matches.
-- Conflict guard now filters only SCHEDULED appointments; CANCELED slots are reusable.
-- Error message updated to reflect the overlap nature of the conflict.
-- Tests added: overlap start within existing, canceled slot reuse, adjacent slot allowed.
+- docs/product/appointment-lifecycle.md created.
+- States documented: SCHEDULED, CANCELED (current); PENDING, REJECTED (planned future).
+- Transitions, prohibited transitions, availability impact, and responsibility matrix defined.
+- MVP boundaries and future evolution notes documented.
 
 ## Explicit Limits
 
 - No model changes.
 - No migrations.
+- No code changes.
 - No public login.
 - No email sending.
 - No payment flow.
 - No REST API.
 - No deployment.
 - No dependency changes.
-- Commit and push authorized by Trigger: 0e71035.
+- No commit or push without Trigger authorization.
 
-CBM-014 remains not opened.
+CBM-015 remains not opened.

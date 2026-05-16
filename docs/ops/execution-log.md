@@ -42,16 +42,27 @@ Runtime context: `ric-orchestrator-runtime:latest`
 - Push authorized by Trigger: 0e71035 reached origin/main.
 - Did not open CBM-014.
 
+## CBM-014
+
+- Started CBM-014 from CBM-013 Remote DONE at commit 0e71035 on origin/main.
+- Audited models, forms, admin, original product docs, and operational docs before writing.
+- Created docs/product/appointment-lifecycle.md.
+- Documented SCHEDULED and CANCELED as the current MVP states.
+- Documented PENDING and REJECTED as planned future states, not yet in the model.
+- Defined permitted and prohibited transitions, availability impact, and responsibility matrix.
+- Documented MVP boundaries and future evolution notes.
+- Did not alter any code.
+- Did not create migrations.
+- Did not open CBM-015.
+- Did not commit.
+- Did not push.
+
 ## Current End State
 
-CBM-013 is Remote DONE.
-
-Commit 0e71035 is on origin/main. HEAD and origin/main are synchronized. Working tree is clean.
+CBM-014 ends in REVIEW.
 
 READY remains empty.
 
-CBM-013 Local DONE: confirmed — commit 0e71035.
+CBM-014 Local DONE and Remote DONE are not declared.
 
-CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main.
-
-CBM-014 remains not started and not opened.
+CBM-015 remains not opened.

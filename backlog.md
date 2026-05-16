@@ -18,16 +18,19 @@
 
 ## REVIEW
 
+- CBM-014: Document Appointment Lifecycle.
+
 ## READY
 
 ## FUTURE
 
-- CBM-014: Not started and not opened. Requires explicit Trigger approval.
+- CBM-015: Not opened. Requires explicit Trigger approval.
 - Add richer status schema only after explicit approval for a later task.
 - Add email, payment, API, public login, or deployment only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-013
+## BLOCKED / OUT OF SCOPE FOR CBM-014
 
+- Code changes.
 - Model changes.
 - Migrations.
 - BlockedSlot model.
@@ -38,4 +41,4 @@
 - REST API.
 - Deployment.
 - Dependency changes.
-- Commit or push without authorization.
+- Commit or push without Trigger authorization.
