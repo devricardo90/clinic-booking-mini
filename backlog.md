@@ -14,10 +14,9 @@
 - CBM-010: Add appointment request time guard.
 - CBM-011: Add appointment request admin review flow.
 - CBM-012: Implement End-to-End Appointment Request Lifecycle.
+- CBM-013: Implement Clinic Availability Guards. (commit 0e71035)
 
 ## REVIEW
-
-- CBM-013: Implement Clinic Availability Guards.
 
 ## READY
 

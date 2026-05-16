@@ -2,9 +2,9 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-013
+Last completed: CBM-013
 
-State: REVIEW
+State: Remote DONE
 
 ## Starting Point
 
@@ -33,19 +33,18 @@ and `scheduled_for`, both already present on `Appointment` and `Service`.
 ## Important Boundary
 
 No model changes, migrations, settings changes, dependency changes, public login, email, payment,
-REST API, deployment, commit, or push were included.
+or REST API were included. Commit and push were authorized by Trigger.
 
 ## Current State
 
-- CBM-013 is in REVIEW.
+- CBM-013 is Remote DONE.
+- Commit 0e71035 is on origin/main. HEAD and origin/main are synchronized.
+- Working tree is clean.
 - READY is empty.
-- CBM-013 Local DONE is not declared.
-- CBM-013 Remote DONE is not declared.
-- No commit has been made for CBM-013.
-- No push has been made for CBM-013.
+- CBM-013 Local DONE: confirmed — commit 0e71035.
+- CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main.
 - CBM-014 has not been opened.
 
-## Suggested Next Review
+## Next Step
 
-Review the overlap guard logic, updated and new tests, validation evidence, and Git diff
-before approving CBM-013 for Local DONE and a controlled commit.
+CBM-014 requires explicit Trigger approval before being opened.

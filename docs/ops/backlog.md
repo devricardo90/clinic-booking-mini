@@ -16,10 +16,9 @@ Project: Clinic Booking Mini
 - CBM-010: Add appointment request time guard.
 - CBM-011: Add appointment request admin review flow.
 - CBM-012: Implement End-to-End Appointment Request Lifecycle.
+- CBM-013: Implement Clinic Availability Guards. (commit 0e71035)
 
 ## REVIEW
-
-- CBM-013: Implement Clinic Availability Guards.
 
 ## READY
 
@@ -29,8 +28,8 @@ Project: Clinic Booking Mini
 
 ## Notes
 
-READY intentionally remains empty for CBM-013.
+READY is empty. No new task has been opened.
 
-CBM-013 Local DONE is not declared.
+CBM-013 Local DONE: confirmed — commit 0e71035.
 
-CBM-013 Remote DONE is not declared.
+CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main.

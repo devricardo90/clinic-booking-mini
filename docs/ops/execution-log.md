@@ -38,16 +38,20 @@ Runtime context: `ric-orchestrator-runtime:latest`
 - Did not create BlockedSlot model or visual calendar.
 - Did not alter settings or dependencies.
 - Did not create login, email, payment, API, or deployment features.
-- Did not commit.
-- Did not push.
+- Commit authorized by Trigger: 0e71035 — fix: add appointment availability overlap guards.
+- Push authorized by Trigger: 0e71035 reached origin/main.
 - Did not open CBM-014.
 
 ## Current End State
 
-CBM-013 ends in REVIEW.
+CBM-013 is Remote DONE.
+
+Commit 0e71035 is on origin/main. HEAD and origin/main are synchronized. Working tree is clean.
 
 READY remains empty.
 
-CBM-013 Local DONE and Remote DONE are not declared.
+CBM-013 Local DONE: confirmed — commit 0e71035.
+
+CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main.
 
 CBM-014 remains not started and not opened.

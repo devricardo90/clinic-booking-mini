@@ -2,17 +2,17 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-013
+Last completed: CBM-013
 
-State: REVIEW
+State: Remote DONE
 
 READY:
 
-CBM-001 through CBM-012: Remote DONE
+CBM-001 through CBM-013: Remote DONE
 
-CBM-013 Local DONE: not declared
+CBM-013 Local DONE: confirmed — commit 0e71035
 
-CBM-013 Remote DONE: not declared
+CBM-013 Remote DONE: confirmed — commit 0e71035 on origin/main
 
 ## Current Scope
 
@@ -48,12 +48,11 @@ Validation evidence collected:
 - No REST API.
 - No deployment.
 - No dependency changes.
-- No commit.
-- No push.
+- Commit and push authorized by Trigger: 0e71035.
 
-## Review State
+## End State
 
-CBM-013 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
+CBM-013 is Remote DONE. Commit 0e71035 is on origin/main. HEAD and origin/main are synchronized.
 
 READY remains empty.
 
