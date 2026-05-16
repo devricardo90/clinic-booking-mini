@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Request Appointment | Clinic Booking Mini</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f6f7f9;
+            --panel: #ffffff;
+            --ink: #1f2933;
+            --muted: #5f6b7a;
+            --line: #d9dee7;
+            --accent: #24736f;
+            --accent-dark: #185653;
+            --error: #a33a3a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 42px 20px;
+        }
+
+        .shell {
+            width: min(760px, 100%);
+            margin: 0 auto;
+        }
+
+        .topline {
+            margin-bottom: 22px;
+        }
+
+        .back-link {
+            color: var(--accent-dark);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .panel {
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--panel);
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        .intro {
+            margin: 0 0 24px;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .field {
+            display: grid;
+            gap: 7px;
+        }
+
+        label {
+            font-weight: 700;
+        }
+
+        input,
+        select {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: #ffffff;
+            color: var(--ink);
+            font: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: 2px solid rgba(36, 115, 111, 0.22);
+            border-color: var(--accent);
+        }
+
+        .errors,
+        .non-field-errors {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--error);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        button {
+            min-height: 44px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 6px;
+            background: var(--accent);
+            color: #ffffff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        button:hover,
+        button:focus {
+            background: var(--accent-dark);
+        }
+
+        .admin-link {
+            color: var(--muted);
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <div class="shell">
+            <div class="topline">
+                <a class="back-link" href="{% url 'home' %}">Back to overview</a>
+            </div>
+            <section class="panel">
+                <h1>Request an Appointment</h1>
+                <p class="intro">
+                    Submit a minimal appointment request using the services and professionals currently available in the MVP.
+                </p>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <ul class="non-field-errors">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% for field in form %}
+                        <div class="field">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.errors %}
+                                <ul class="errors">
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <div class="actions">
+                        <button type="submit">Submit Request</button>
+                        <a class="admin-link" href="/admin/">Open Admin Dashboard</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

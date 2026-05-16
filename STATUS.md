@@ -4,47 +4,47 @@ Project: Clinic Booking Mini
 
 Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runtime:latest`
 
-Current item: CBM-004
+Current item: CBM-008
 
-Current state: REVIEW
+Current state: Local DONE pending commit
 
 READY:
 
-CBM-001 Remote DONE: declared at commit `4796bc9`
+CBM-001 through CBM-007: Remote DONE
 
-CBM-002 Remote DONE: declared at commit `20e91a3`
+CBM-008 Local DONE: validated, pending controlled commit
 
-CBM-003 Remote DONE: declared at commit `425df38`
-
-CBM-004 Local DONE: not declared
-
-CBM-004 Remote DONE: not declared
+CBM-008 Remote DONE: not declared
 
 ## Summary
 
-CBM-004 registers the existing scheduling models in Django Admin using simple `ModelAdmin` classes.
+CBM-008 implements the minimal public appointment request flow.
 
-The registration covers `Client`, `Service`, `Professional`, and `Appointment` with `list_display`, `list_filter`, `search_fields`, `ordering`, and readonly `created_at` / `updated_at` fields.
+Implemented scope:
 
-No models, migrations, CRUD views, forms, URLs, templates, authentication changes, APIs, dependencies, deployment files, seed data, real data, or sensitive health data are included.
+- Public route `/appointments/new/`.
+- Public route `/appointments/success/`.
+- `AppointmentRequestForm`.
+- Client creation/reuse by email.
+- Appointment creation with status `SCHEDULED`.
+- Public homepage link to request an appointment.
 
-## Privacy And Safety Boundary
+## Validation
 
-Clinic Booking Mini is not a medical records system.
+- `python manage.py check` passed.
+- `python manage.py seed_demo_data` passed.
+- Browser smoke passed: home 200, form 200, POST 302, success 200, admin login 200.
+- Appointment was created for `cbm008.smoke@example.com`.
 
-The MVP must not include diagnosis, prescription, treatment records, clinical notes, anamnesis, imaging, medical documents, real patient data, or sensitive health data.
+## Explicit Limits
 
-Only fictitious administrative data is allowed for local MVP testing.
+- No availability engine.
+- No conflict prevention.
+- No cancellation flow.
+- No email sending.
+- No payment flow.
+- No API.
+- No public login.
+- `db.sqlite3` and `__pycache__` remain outside Git.
 
-## Review Notes
-
-CBM-004 should be reviewed for:
-
-- Django Admin registration only.
-- No changes to `scheduling/models.py`.
-- No migrations generated.
-- No changes to settings, URLs, templates, views, forms, APIs, auth, dependencies, deployment, or seed data.
-- Django check passing.
-- No commit or push.
-
-CBM-005 remains not opened.
+CBM-009 remains not opened.

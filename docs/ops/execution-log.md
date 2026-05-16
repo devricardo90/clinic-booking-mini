@@ -4,43 +4,48 @@ Project: Clinic Booking Mini
 
 Runtime context: `ric-orchestrator-runtime:latest`
 
-## CBM-001
+## Completed Remote DONE Tasks
 
-- Created the approved MVP scope documentation baseline.
-- Reached Remote DONE at commit `4796bc9`.
+- CBM-001: MVP scope documentation baseline.
+- CBM-002: Django MVP foundation.
+- CBM-003: Core scheduling models.
+- CBM-004: Scheduling models registered in Django Admin.
+- CBM-005: Django Admin scheduling flow validated and admin route enabled.
+- CBM-006: Public homepage and admin navigation.
+- CBM-007: Demo data seed and read-only public overview.
 
-## CBM-002
+## CBM-008
 
-- Created the minimal Django MVP foundation.
-- Reached Remote DONE at commit `20e91a3`.
-
-## CBM-003
-
-- Implemented core administrative scheduling models.
-- Reached Remote DONE at commit `425df38`.
-
-## CBM-004
-
-- Started CBM-004 from CBM-003 Remote DONE at commit `425df38`.
-- Confirmed the working tree was clean before execution.
-- Registered `Client`, `Service`, `Professional`, and `Appointment` in `scheduling/admin.py`.
-- Added simple `ModelAdmin` classes with `list_display`, `list_filter`, `search_fields`, `ordering`, and readonly timestamp fields.
-- Did not alter `scheduling/models.py`.
-- Did not create migrations.
-- Did not run `makemigrations`.
-- Did not run `migrate`.
-- Did not alter settings, URLs, templates, views, forms, APIs, auth, seed data, deployment, packages, or dependencies.
-- Did not use real patient data or sensitive health data.
+- Implemented route `/appointments/new/`.
+- Implemented route `/appointments/success/`.
+- Added `AppointmentRequestForm`.
+- Added public appointment request form template.
+- Added appointment success template.
+- Updated homepage with a public appointment request link.
+- Implemented Client creation/reuse by email.
+- Implemented Appointment creation with status `SCHEDULED`.
+- Validated `python manage.py check`.
+- Validated `python manage.py seed_demo_data`.
+- Completed browser smoke: home 200, form 200, POST 302, success 200, admin login 200.
+- Confirmed Appointment creation for `cbm008.smoke@example.com`.
+- Kept `db.sqlite3` and `__pycache__` outside Git.
+- Did not implement availability.
+- Did not implement conflict prevention.
+- Did not implement cancellation.
+- Did not implement email.
+- Did not implement payment.
+- Did not implement API.
+- Did not implement public login.
+- Did not open CBM-009.
 - Did not commit.
 - Did not push.
-- Did not open CBM-005.
 
 ## Current End State
 
-CBM-004 ends in REVIEW.
+CBM-008 ends in Local DONE pending commit.
 
 READY remains empty.
 
-CBM-004 Local DONE and Remote DONE are not declared.
+CBM-008 Remote DONE is not declared.
 
-CBM-005 remains not started and not opened.
+CBM-009 remains not started and not opened.

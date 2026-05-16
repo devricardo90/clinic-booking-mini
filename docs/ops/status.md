@@ -2,63 +2,58 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-004
+Task: CBM-008
 
-State: REVIEW
+State: Local DONE pending commit
 
 READY:
 
-CBM-001 Remote DONE: declared at commit `4796bc9`
+CBM-001 through CBM-007: Remote DONE
 
-CBM-002 Remote DONE: declared at commit `20e91a3`
+CBM-008 Local DONE: validated, pending controlled commit
 
-CBM-003 Remote DONE: declared at commit `425df38`
-
-CBM-004 Local DONE: not declared
-
-CBM-004 Remote DONE: not declared
+CBM-008 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-004 registers the scheduling models in Django Admin with simple `ModelAdmin` classes.
+CBM-008 adds the first minimal public appointment request flow.
 
-Allowed scope:
+Implemented scope:
 
-- `scheduling/admin.py`
-- Operational documentation updates
-- Django validation
+- Public route `/appointments/new/`.
+- Public route `/appointments/success/`.
+- `AppointmentRequestForm`.
+- Client creation/reuse by email.
+- Appointment creation with status `SCHEDULED`.
+- Public homepage link to request an appointment.
 
-## Execution Boundary
+## Validation State
 
-Allowed:
+- `python manage.py check` passed.
+- `python manage.py seed_demo_data` passed.
+- Browser smoke passed:
+  - home 200
+  - form 200
+  - POST 302
+  - success 200
+  - admin login 200
+- Appointment created for `cbm008.smoke@example.com`.
 
-- Register `Client`
-- Register `Service`
-- Register `Professional`
-- Register `Appointment`
-- Simple `ModelAdmin` options:
-  - `list_display`
-  - `list_filter`
-  - `search_fields`
-  - `ordering`
-  - `readonly_fields` for `created_at` and `updated_at`
+## Explicit Limits
 
-Blocked:
+- No availability engine.
+- No conflict prevention.
+- No cancellation flow.
+- No email sending.
+- No payment flow.
+- No API.
+- No public login.
+- `db.sqlite3` and `__pycache__` are outside Git.
 
-- Changes to `scheduling/models.py`.
-- Migrations.
-- `makemigrations`.
-- `migrate`.
-- Settings, URLs, templates, views, forms, APIs, auth, seed data, deployment, package, or dependency changes.
-- Real patient data or sensitive health data.
-- Commit.
-- Push.
-- Opening CBM-005 automatically.
+## Current Operational State
 
-## Review State
-
-CBM-004 remains in REVIEW until the Trigger explicitly approves Local DONE and any controlled commit.
+CBM-008 is Local DONE pending controlled commit.
 
 READY remains empty.
 
-CBM-005 remains not started and not opened.
+CBM-009 remains not started and not opened.

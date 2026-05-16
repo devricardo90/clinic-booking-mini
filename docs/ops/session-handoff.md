@@ -2,49 +2,53 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-004
+Task: CBM-008
 
-State: REVIEW
+State: Local DONE pending commit
 
 ## Starting Point
 
-CBM-001 is Remote DONE at commit `4796bc9`.
+CBM-007 is Remote DONE at commit `0f2f137`.
 
-CBM-002 is Remote DONE at commit `20e91a3`.
-
-CBM-003 is Remote DONE at commit `425df38`.
-
-`main` was clean and synced with `origin/main` before CBM-004 execution.
+The project has a public homepage, Django Admin, idempotent demo seed data, and read-only public overview data.
 
 ## What Was Done
 
-CBM-004 registers the scheduling models in Django Admin:
+CBM-008 adds a minimal public appointment request flow:
 
-- `Client`
-- `Service`
-- `Professional`
-- `Appointment`
+- `/appointments/new/`
+- `/appointments/success/`
+- `AppointmentRequestForm`
+- Client creation/reuse by email
+- Appointment creation with status `SCHEDULED`
+- Public homepage link to the appointment request form
 
-Each model uses a simple `ModelAdmin` with list display, filters, search fields, ordering, and readonly timestamp fields.
+## Validation
 
-## Important Boundary
+- `python manage.py check` passed.
+- `python manage.py seed_demo_data` passed.
+- Browser smoke passed: home 200, form 200, POST 302, success 200, admin login 200.
+- Appointment was created for `cbm008.smoke@example.com`.
 
-This project is not a medical records system.
+## Important Limits
 
-Do not add diagnosis, prescription, treatment records, clinical notes, anamnesis, imaging, medical documents, real patient data, or sensitive health data.
-
-CBM-004 does not include model changes, migrations, CRUD, templates, views, forms, URLs, authentication changes, APIs, integrations, Docker, deployment, package changes, dependency changes, or production operations.
+- No availability engine.
+- No conflict prevention.
+- No cancellation flow.
+- No email sending.
+- No payment flow.
+- No API.
+- No public login.
+- `db.sqlite3` and `__pycache__` are outside Git.
 
 ## Current State
 
-- CBM-004 is in REVIEW.
+- CBM-008 is Local DONE pending controlled commit.
 - READY is empty.
-- CBM-004 Local DONE is not declared.
-- CBM-004 Remote DONE is not declared.
-- No commit has been made for CBM-004.
-- No push has been made for CBM-004.
-- CBM-005 has not been opened.
+- CBM-008 Remote DONE is not declared.
+- No push has been made for CBM-008.
+- CBM-009 has not been opened.
 
-## Suggested Next Review
+## Suggested Next Step
 
-Review the admin registration and validation evidence before approving CBM-004 for Local DONE and a controlled commit.
+Create the controlled CBM-008 commit only after explicit authorization.
