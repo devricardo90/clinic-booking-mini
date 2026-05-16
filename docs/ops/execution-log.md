@@ -13,39 +13,34 @@ Runtime context: `ric-orchestrator-runtime:latest`
 - CBM-005: Django Admin scheduling flow validated and admin route enabled.
 - CBM-006: Public homepage and admin navigation.
 - CBM-007: Demo data seed and read-only public overview.
+- CBM-008: Minimal public appointment request flow.
 
-## CBM-008
+## CBM-009
 
-- Implemented route `/appointments/new/`.
-- Implemented route `/appointments/success/`.
-- Added `AppointmentRequestForm`.
-- Added public appointment request form template.
-- Added appointment success template.
-- Updated homepage with a public appointment request link.
-- Implemented Client creation/reuse by email.
-- Implemented Appointment creation with status `SCHEDULED`.
-- Validated `python manage.py check`.
-- Validated `python manage.py seed_demo_data`.
-- Completed browser smoke: home 200, form 200, POST 302, success 200, admin login 200.
-- Confirmed Appointment creation for `cbm008.smoke@example.com`.
-- Kept `db.sqlite3` and `__pycache__` outside Git.
-- Did not implement availability.
-- Did not implement conflict prevention.
-- Did not implement cancellation.
-- Did not implement email.
-- Did not implement payment.
-- Did not implement API.
-- Did not implement public login.
-- Did not open CBM-009.
+- Started CBM-009 from a clean `main` synced with `origin/main`.
+- Inspected scheduling models, views, forms, public templates, and tests.
+- Added a conflict guard to `AppointmentRequestForm`.
+- The guard blocks requests for the same professional at the same date and time.
+- The public form displays a clear non-field error for conflicts.
+- Added focused tests for blocked duplicate time and allowed different time.
+- Did not alter models.
+- Did not create migrations.
+- Did not run `makemigrations`.
+- Did not change global settings.
+- Did not redesign UI.
+- Did not create an advanced calendar.
+- Did not create authentication or API.
+- Did not deploy.
 - Did not commit.
 - Did not push.
+- Did not open CBM-010.
 
 ## Current End State
 
-CBM-008 ends in Local DONE pending commit.
+CBM-009 ends in REVIEW.
 
 READY remains empty.
 
-CBM-008 Remote DONE is not declared.
+CBM-009 Local DONE and Remote DONE are not declared.
 
-CBM-009 remains not started and not opened.
+CBM-010 remains not started and not opened.

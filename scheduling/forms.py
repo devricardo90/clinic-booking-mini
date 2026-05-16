@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Professional, Service
+from .models import Appointment, Professional, Service
 
 
 class AppointmentRequestForm(forms.Form):
@@ -27,3 +27,20 @@ class AppointmentRequestForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.fields["service"].queryset = Service.objects.filter(is_active=True).order_by("name")
         self.fields["professional"].queryset = Professional.objects.filter(is_active=True).order_by("full_name")
+
+    def clean(self):
+        cleaned_data = super().clean()
+        professional = cleaned_data.get("professional")
+        scheduled_for = cleaned_data.get("scheduled_for")
+
+        if professional and scheduled_for:
+            conflict_exists = Appointment.objects.filter(
+                professional=professional,
+                scheduled_for=scheduled_for,
+            ).exists()
+            if conflict_exists:
+                raise forms.ValidationError(
+                    "This professional already has an appointment at the selected date and time."
+                )
+
+        return cleaned_data

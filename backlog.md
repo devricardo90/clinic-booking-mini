@@ -9,29 +9,29 @@
 - CBM-005: Validate Django Admin Scheduling Flow.
 - CBM-006: Add minimal public homepage and admin navigation.
 - CBM-007: Add demo data seed and public read-only clinic overview.
-
-## LOCAL DONE PENDING COMMIT
-
 - CBM-008: Implement minimal public appointment request flow.
+
+## REVIEW
+
+- CBM-009: Add appointment conflict guard.
 
 ## READY
 
 ## FUTURE
 
-- CBM-009: Not started and not opened. Requires explicit Trigger approval.
-- Add availability rules only after explicit approval for a later task.
-- Add conflict prevention only after explicit approval for a later task.
-- Add cancellation flow only after explicit approval for a later task.
-- Add email, payment, API, or public login only after explicit approval for a later task.
+- CBM-010: Not started and not opened. Requires explicit Trigger approval.
+- Add advanced availability only after explicit approval for a later task.
+- Add cancellation only after explicit approval for a later task.
+- Add public login or API only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-008
+## BLOCKED / OUT OF SCOPE FOR CBM-009
 
-- Availability engine.
-- Appointment conflict prevention.
-- Cancellation flow.
-- Email sending.
-- Payment processing.
-- Public login.
-- API.
-- Real patient data or sensitive health data.
-- Committing `db.sqlite3`, `__pycache__`, or generated local files.
+- UI redesign.
+- Advanced calendar.
+- New admin panel.
+- Authentication.
+- REST API.
+- Database schema changes.
+- Migrations.
+- Deployment.
+- Commit or push without authorization.

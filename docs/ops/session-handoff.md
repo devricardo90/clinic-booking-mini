@@ -2,53 +2,39 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-008
+Task: CBM-009
 
-State: Local DONE pending commit
+State: REVIEW
 
 ## Starting Point
 
-CBM-007 is Remote DONE at commit `0f2f137`.
+CBM-008 is Remote DONE at commit `b47d9b0`.
 
-The project has a public homepage, Django Admin, idempotent demo seed data, and read-only public overview data.
+The project has a public appointment request flow that can create `Appointment` records.
 
 ## What Was Done
 
-CBM-008 adds a minimal public appointment request flow:
+CBM-009 adds a basic appointment conflict guard:
 
-- `/appointments/new/`
-- `/appointments/success/`
-- `AppointmentRequestForm`
-- Client creation/reuse by email
-- Appointment creation with status `SCHEDULED`
-- Public homepage link to the appointment request form
+- Blocks the same professional at the same scheduled date/time.
+- Shows a clear public form error message.
+- Allows the same professional at a different scheduled time.
+- Adds focused tests for both cases.
 
-## Validation
+## Important Boundary
 
-- `python manage.py check` passed.
-- `python manage.py seed_demo_data` passed.
-- Browser smoke passed: home 200, form 200, POST 302, success 200, admin login 200.
-- Appointment was created for `cbm008.smoke@example.com`.
-
-## Important Limits
-
-- No availability engine.
-- No conflict prevention.
-- No cancellation flow.
-- No email sending.
-- No payment flow.
-- No API.
-- No public login.
-- `db.sqlite3` and `__pycache__` are outside Git.
+No model changes, migrations, global settings changes, UI redesign, advanced calendar, authentication, REST API, deployment, commit, or push were included.
 
 ## Current State
 
-- CBM-008 is Local DONE pending controlled commit.
+- CBM-009 is in REVIEW.
 - READY is empty.
-- CBM-008 Remote DONE is not declared.
-- No push has been made for CBM-008.
-- CBM-009 has not been opened.
+- CBM-009 Local DONE is not declared.
+- CBM-009 Remote DONE is not declared.
+- No commit has been made for CBM-009.
+- No push has been made for CBM-009.
+- CBM-010 has not been opened.
 
-## Suggested Next Step
+## Suggested Next Review
 
-Create the controlled CBM-008 commit only after explicit authorization.
+Review the conflict guard, tests, manual validation, and Git evidence before approving CBM-009 for Local DONE and a controlled commit.

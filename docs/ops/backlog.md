@@ -11,21 +11,22 @@ Project: Clinic Booking Mini
 - CBM-005: Validate Django Admin Scheduling Flow.
 - CBM-006: Add minimal public homepage and admin navigation.
 - CBM-007: Add demo data seed and public read-only clinic overview.
-
-## LOCAL DONE PENDING COMMIT
-
 - CBM-008: Implement minimal public appointment request flow.
+
+## REVIEW
+
+- CBM-009: Add appointment conflict guard.
 
 ## READY
 
 ## NOT STARTED
 
-- CBM-009: Not opened. Requires explicit Trigger approval.
+- CBM-010: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
-READY intentionally remains empty for CBM-008.
+READY intentionally remains empty for CBM-009.
 
-CBM-008 Local DONE is validated and pending controlled commit.
+CBM-009 Local DONE is not declared.
 
-CBM-008 Remote DONE is not declared.
+CBM-009 Remote DONE is not declared.

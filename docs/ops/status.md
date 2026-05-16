@@ -2,58 +2,56 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-008
+Task: CBM-009
 
-State: Local DONE pending commit
+State: REVIEW
 
 READY:
 
-CBM-001 through CBM-007: Remote DONE
+CBM-001 through CBM-008: Remote DONE
 
-CBM-008 Local DONE: validated, pending controlled commit
+CBM-009 Local DONE: not declared
 
-CBM-008 Remote DONE: not declared
+CBM-009 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-008 adds the first minimal public appointment request flow.
+CBM-009 adds a basic conflict guard to the existing public appointment request flow.
 
 Implemented scope:
 
-- Public route `/appointments/new/`.
-- Public route `/appointments/success/`.
-- `AppointmentRequestForm`.
-- Client creation/reuse by email.
-- Appointment creation with status `SCHEDULED`.
-- Public homepage link to request an appointment.
+- Validation blocks a request when an existing appointment has the same professional and the same scheduled date/time.
+- The existing public form displays a clear conflict message.
+- A different time for the same professional remains allowed.
+- Tests cover both paths.
 
 ## Validation State
 
-- `python manage.py check` passed.
-- `python manage.py seed_demo_data` passed.
-- Browser smoke passed:
-  - home 200
-  - form 200
-  - POST 302
-  - success 200
-  - admin login 200
-- Appointment created for `cbm008.smoke@example.com`.
+Validation evidence is collected in the session output:
+
+- `python manage.py check`
+- `python manage.py test scheduling`
+- Manual public flow validation by HTTP POST and shell query
+- `git diff --check`
 
 ## Explicit Limits
 
-- No availability engine.
-- No conflict prevention.
-- No cancellation flow.
-- No email sending.
-- No payment flow.
-- No API.
-- No public login.
-- `db.sqlite3` and `__pycache__` are outside Git.
+- No UI redesign.
+- No advanced calendar.
+- No new admin panel.
+- No authentication.
+- No REST API.
+- No database schema changes.
+- No migrations.
+- No global settings changes.
+- No deployment.
+- No commit.
+- No push.
 
-## Current Operational State
+## Review State
 
-CBM-008 is Local DONE pending controlled commit.
+CBM-009 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
 
 READY remains empty.
 
-CBM-009 remains not started and not opened.
+CBM-010 remains not started and not opened.
