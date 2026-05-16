@@ -13,23 +13,26 @@
 - CBM-009: Add appointment conflict guard.
 - CBM-010: Add appointment request time guard.
 - CBM-011: Add appointment request admin review flow.
+- CBM-012: Implement End-to-End Appointment Request Lifecycle.
 
 ## REVIEW
 
-- CBM-012: Implement End-to-End Appointment Request Lifecycle.
+- CBM-013: Implement Clinic Availability Guards.
 
 ## READY
 
 ## FUTURE
 
-- CBM-013: Not started and not opened. Requires explicit Trigger approval.
+- CBM-014: Not started and not opened. Requires explicit Trigger approval.
 - Add richer status schema only after explicit approval for a later task.
 - Add email, payment, API, public login, or deployment only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-012
+## BLOCKED / OUT OF SCOPE FOR CBM-013
 
 - Model changes.
 - Migrations.
+- BlockedSlot model.
+- Visual calendar.
 - Public login.
 - Email sending.
 - Payment flow.

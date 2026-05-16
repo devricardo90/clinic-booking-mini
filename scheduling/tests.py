@@ -47,9 +47,53 @@ class PublicAppointmentRequestTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "This professional already has an appointment at the selected date and time.",
+            "This time slot conflicts with an existing appointment for this professional.",
         )
         self.assertEqual(Appointment.objects.count(), 1)
+
+    def test_public_request_blocks_overlapping_start_within_existing(self):
+        # Existing: 09:00–09:45. New starts at 09:30 — overlaps.
+        overlap_start = self.scheduled_for + timedelta(minutes=30)
+
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(overlap_start),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "This time slot conflicts with an existing appointment for this professional.",
+        )
+        self.assertEqual(Appointment.objects.count(), 1)
+
+    def test_public_request_allows_canceled_appointment_slot(self):
+        # Cancel the existing appointment — same slot should now be available.
+        from .models import Appointment as A
+        A.objects.filter(
+            professional=self.professional,
+            scheduled_for=self.scheduled_for,
+        ).update(status=A.Status.CANCELED)
+
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(self.scheduled_for),
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Appointment.objects.filter(status=A.Status.SCHEDULED).count(), 1)
+
+    def test_public_request_allows_adjacent_slot_after_existing(self):
+        # Existing: 09:00–09:45. New starts exactly at 09:45 — no overlap.
+        adjacent_start = self.scheduled_for + timedelta(minutes=self.service.duration_minutes)
+
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(adjacent_start),
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Appointment.objects.count(), 2)
 
     def test_public_request_blocks_past_datetime(self):
         response = self.client.post(

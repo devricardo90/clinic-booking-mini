@@ -4,28 +4,28 @@ Project: Clinic Booking Mini
 
 Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runtime:latest`
 
-Current item: CBM-012
+Current item: CBM-013
 
 Current state: REVIEW
 
 READY:
 
-CBM-001 through CBM-011: Remote DONE
+CBM-001 through CBM-012: Remote DONE
 
-CBM-012 Local DONE: not declared
+CBM-013 Local DONE: not declared
 
-CBM-012 Remote DONE: not declared
+CBM-013 Remote DONE: not declared
 
 ## Summary
 
-CBM-012 implements a more complete end-to-end appointment request lifecycle without changing the database schema.
+CBM-013 improves clinic availability guards without changing the database schema.
 
 Implemented scope:
 
-- Public request flow continues to validate input and create appointments.
-- Success page now shows a clear appointment request summary.
-- Django Admin exposes status lifecycle actions for `SCHEDULED` and `CANCELED`.
-- Tests cover public request confirmation and admin status transitions.
+- Conflict guard now detects overlapping time ranges, not just exact datetime matches.
+- Conflict guard now filters only SCHEDULED appointments; CANCELED slots are reusable.
+- Error message updated to reflect the overlap nature of the conflict.
+- Tests added: overlap start within existing, canceled slot reuse, adjacent slot allowed.
 
 ## Explicit Limits
 
@@ -39,4 +39,4 @@ Implemented scope:
 - No dependency changes.
 - No commit or push.
 
-CBM-013 remains not opened.
+CBM-014 remains not opened.

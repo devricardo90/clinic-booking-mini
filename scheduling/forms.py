@@ -59,15 +59,25 @@ class AppointmentRequestForm(forms.Form):
                 if local_end.date() != local_start.date() or local_end.time() > CLOSING_TIME:
                     errors.append("Appointments must finish by 18:00.")
 
-        if professional and scheduled_for:
-            conflict_exists = Appointment.objects.filter(
-                professional=professional,
-                scheduled_for=scheduled_for,
-            ).exists()
-            if conflict_exists:
-                errors.append(
-                    "This professional already has an appointment at the selected date and time."
+        if professional and scheduled_for and service:
+            new_start = scheduled_for
+            new_end = scheduled_for + timedelta(minutes=service.duration_minutes)
+            candidates = (
+                Appointment.objects.filter(
+                    professional=professional,
+                    status=Appointment.Status.SCHEDULED,
+                    scheduled_for__lt=new_end,
+                    scheduled_for__gte=new_start - timedelta(hours=8),
                 )
+                .select_related("service")
+            )
+            for appt in candidates:
+                appt_end = appt.scheduled_for + timedelta(minutes=appt.service.duration_minutes)
+                if appt_end > new_start:
+                    errors.append(
+                        "This time slot conflicts with an existing appointment for this professional."
+                    )
+                    break
 
         if errors:
             raise forms.ValidationError(errors)
