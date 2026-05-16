@@ -13,21 +13,22 @@ Project: Clinic Booking Mini
 - CBM-007: Add demo data seed and public read-only clinic overview.
 - CBM-008: Implement minimal public appointment request flow.
 - CBM-009: Add appointment conflict guard.
+- CBM-010: Add appointment request time guard.
 
 ## REVIEW
 
-- CBM-010: Add appointment request time guard.
+- CBM-011: Add appointment request admin review flow.
 
 ## READY
 
 ## NOT STARTED
 
-- CBM-011: Not opened. Requires explicit Trigger approval.
+- CBM-012: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
-READY intentionally remains empty for CBM-010.
+READY intentionally remains empty for CBM-011.
 
-CBM-010 Local DONE is not declared.
+CBM-011 Local DONE is not declared.
 
-CBM-010 Remote DONE is not declared.
+CBM-011 Remote DONE is not declared.

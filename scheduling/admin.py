@@ -32,8 +32,52 @@ class ProfessionalAdmin(admin.ModelAdmin):
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ("client", "service", "professional", "scheduled_for", "status", "created_at", "updated_at")
-    list_filter = ("status", "scheduled_for")
-    search_fields = ("client__full_name", "service__name", "professional__full_name")
-    ordering = ("scheduled_for",)
+    list_display = (
+        "scheduled_for",
+        "status",
+        "client",
+        "client_phone",
+        "client_email",
+        "service",
+        "professional",
+        "created_at",
+    )
+    list_filter = ("status", "scheduled_for", "service", "professional")
+    search_fields = (
+        "client__full_name",
+        "client__phone",
+        "client__email",
+        "service__name",
+        "professional__full_name",
+    )
+    ordering = ("scheduled_for", "created_at")
     readonly_fields = ("created_at", "updated_at")
+    date_hierarchy = "scheduled_for"
+    fieldsets = (
+        (
+            "Appointment request",
+            {
+                "fields": (
+                    "client",
+                    "service",
+                    "professional",
+                    "scheduled_for",
+                    "status",
+                )
+            },
+        ),
+        (
+            "Audit",
+            {
+                "fields": ("created_at", "updated_at"),
+            },
+        ),
+    )
+
+    @admin.display(description="Phone")
+    def client_phone(self, obj):
+        return obj.client.phone
+
+    @admin.display(description="Email")
+    def client_email(self, obj):
+        return obj.client.email

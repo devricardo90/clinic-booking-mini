@@ -11,30 +11,28 @@
 - CBM-007: Add demo data seed and public read-only clinic overview.
 - CBM-008: Implement minimal public appointment request flow.
 - CBM-009: Add appointment conflict guard.
+- CBM-010: Add appointment request time guard.
 
 ## REVIEW
 
-- CBM-010: Add appointment request time guard.
+- CBM-011: Add appointment request admin review flow.
 
 ## READY
 
 ## FUTURE
 
-- CBM-011: Not started and not opened. Requires explicit Trigger approval.
-- Add advanced calendar only after explicit approval for a later task.
-- Add per-professional availability only after explicit approval for a later task.
-- Add public login or API only after explicit approval for a later task.
+- CBM-012: Not started and not opened. Requires explicit Trigger approval.
+- Add admin workflow actions only after explicit approval for a later task.
+- Add email, payment, API, or public login only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-010
+## BLOCKED / OUT OF SCOPE FOR CBM-011
 
-- UI redesign.
-- Advanced calendar.
-- Per-professional availability rules.
-- New admin panel.
-- Authentication.
-- REST API.
-- Database schema changes.
+- Model changes.
 - Migrations.
-- Global settings changes.
+- Database changes.
+- Public login.
+- Email.
+- Payment.
+- REST API.
 - Deployment.
 - Commit or push without authorization.

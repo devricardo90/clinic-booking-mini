@@ -2,59 +2,53 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-010
+Task: CBM-011
 
 State: REVIEW
 
 READY:
 
-CBM-001 through CBM-009: Remote DONE
+CBM-001 through CBM-010: Remote DONE
 
-CBM-010 Local DONE: not declared
+CBM-011 Local DONE: not declared
 
-CBM-010 Remote DONE: not declared
+CBM-011 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-010 adds a simple operational time guard to the existing public appointment request flow.
+CBM-011 improves Django Admin review of public appointment requests.
 
 Implemented scope:
 
-- Block scheduled times in the past.
-- Block Saturday and Sunday.
-- Block starts before 08:00.
-- Use `Service.duration_minutes` to block appointments ending after 18:00.
-- Keep the CBM-009 conflict guard active.
-- Add proportional automated tests.
+- Useful appointment request columns in `AppointmentAdmin`.
+- Filters by status, scheduled date, service, and professional.
+- Search by client name, client phone, client email, service, and professional.
+- Ordering by scheduled date and creation date.
+- `date_hierarchy` for scheduled date navigation.
+- Fieldsets for appointment request data and audit data.
 
 ## Validation State
 
 Validation evidence is collected in the session output:
 
 - `python manage.py check`
-- `python manage.py test scheduling`
-- Manual public flow validation by HTTP POST and shell query
+- `python manage.py test`
+- `python manage.py makemigrations --check --dry-run`
 - `git diff --check`
 
 ## Explicit Limits
 
-- No UI redesign.
-- No advanced calendar.
-- No per-professional availability.
-- No new admin panel.
-- No authentication.
-- No REST API.
-- No database schema changes.
+- No model changes.
 - No migrations.
+- No database changes.
 - No global settings changes.
-- No deployment.
-- No commit.
-- No push.
+- No templates, public views, forms, or URLs changed.
+- No public login, email, payment, API, deploy, seed, commit, or push.
 
 ## Review State
 
-CBM-010 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
+CBM-011 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
 
 READY remains empty.
 
-CBM-011 remains not started and not opened.
+CBM-012 remains not started and not opened.

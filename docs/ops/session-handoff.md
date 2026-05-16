@@ -2,41 +2,41 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-010
+Task: CBM-011
 
 State: REVIEW
 
 ## Starting Point
 
-CBM-009 is Remote DONE at commit `347a08d`.
+CBM-010 is Remote DONE at commit `3832131`.
 
-The project has a public appointment request flow with a same-professional/same-date-time conflict guard.
+The project has a public appointment request flow with conflict and time guards.
 
 ## What Was Done
 
-CBM-010 adds a public appointment request time guard:
+CBM-011 improves Django Admin review of appointment requests:
 
-- Blocks appointments in the past.
-- Blocks Saturday and Sunday.
-- Blocks starts before 08:00.
-- Blocks appointments that end after 18:00 using `Service.duration_minutes`.
-- Preserves the CBM-009 conflict guard.
-- Adds focused tests for blocked and allowed paths.
+- More useful appointment request list columns.
+- Client phone and email visible in the appointment list.
+- Filters by status, scheduled date, service, and professional.
+- Search by client contact details, service, and professional.
+- Scheduled date hierarchy.
+- Fieldsets for appointment request and audit timestamps.
 
 ## Important Boundary
 
-No model changes, migrations, global settings changes, UI redesign, advanced calendar, per-professional availability, authentication, REST API, deployment, commit, or push were included.
+No model changes, migrations, database changes, public views, forms, URLs, templates, settings, seed, requirements, login, email, payment, API, deployment, commit, or push were included.
 
 ## Current State
 
-- CBM-010 is in REVIEW.
+- CBM-011 is in REVIEW.
 - READY is empty.
-- CBM-010 Local DONE is not declared.
-- CBM-010 Remote DONE is not declared.
-- No commit has been made for CBM-010.
-- No push has been made for CBM-010.
-- CBM-011 has not been opened.
+- CBM-011 Local DONE is not declared.
+- CBM-011 Remote DONE is not declared.
+- No commit has been made for CBM-011.
+- No push has been made for CBM-011.
+- CBM-012 has not been opened.
 
 ## Suggested Next Review
 
-Review the time guard, conflict guard preservation, tests, manual validation, and Git evidence before approving CBM-010 for Local DONE and a controlled commit.
+Review the admin changes and validation evidence before approving CBM-011 for Local DONE and a controlled commit.
