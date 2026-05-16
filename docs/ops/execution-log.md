@@ -16,31 +16,32 @@ Runtime context: `ric-orchestrator-runtime:latest`
 - CBM-008: Minimal public appointment request flow.
 - CBM-009: Basic appointment conflict guard.
 - CBM-010: Appointment request time guard.
+- CBM-011: Appointment request admin review flow.
 
-## CBM-011
+## CBM-012
 
-- Started CBM-011 from a clean `main` synced with `origin/main`.
-- Inspected current models, admin, forms, views, and URL routing.
-- Improved `AppointmentAdmin` list display for administrative review.
-- Added client phone and email helper columns.
-- Added filters for status, scheduled date, service, and professional.
-- Added search by client name, phone, email, service name, and professional name.
-- Added scheduled date hierarchy.
-- Added fieldsets for appointment request and audit sections.
+- Started CBM-012 from a clean `main` synced with `origin/main`.
+- Audited models, forms, views, admin, tests, templates, and operational docs before editing.
+- Kept the existing schema because the lifecycle can use `Appointment.status`.
+- Stored the created appointment id in the session after a valid public request.
+- Updated the success page to show a clear appointment request summary.
+- Added admin actions to mark selected appointment requests as scheduled or canceled.
+- Added tests for success page summary display.
+- Added tests for admin scheduled/canceled status transitions.
 - Did not alter models.
 - Did not create migrations.
-- Did not alter database.
-- Did not change public views, forms, URLs, templates, settings, seed, requirements, deployment, API, email, payment, or login.
+- Did not alter settings or dependencies.
+- Did not create login, email, payment, API, or deployment features.
 - Did not commit.
 - Did not push.
-- Did not open CBM-012.
+- Did not open CBM-013.
 
 ## Current End State
 
-CBM-011 ends in REVIEW.
+CBM-012 ends in REVIEW.
 
 READY remains empty.
 
-CBM-011 Local DONE and Remote DONE are not declared.
+CBM-012 Local DONE and Remote DONE are not declared.
 
-CBM-012 remains not started and not opened.
+CBM-013 remains not started and not opened.

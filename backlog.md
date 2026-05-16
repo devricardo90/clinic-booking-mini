@@ -12,27 +12,28 @@
 - CBM-008: Implement minimal public appointment request flow.
 - CBM-009: Add appointment conflict guard.
 - CBM-010: Add appointment request time guard.
+- CBM-011: Add appointment request admin review flow.
 
 ## REVIEW
 
-- CBM-011: Add appointment request admin review flow.
+- CBM-012: Implement End-to-End Appointment Request Lifecycle.
 
 ## READY
 
 ## FUTURE
 
-- CBM-012: Not started and not opened. Requires explicit Trigger approval.
-- Add admin workflow actions only after explicit approval for a later task.
-- Add email, payment, API, or public login only after explicit approval for a later task.
+- CBM-013: Not started and not opened. Requires explicit Trigger approval.
+- Add richer status schema only after explicit approval for a later task.
+- Add email, payment, API, public login, or deployment only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-011
+## BLOCKED / OUT OF SCOPE FOR CBM-012
 
 - Model changes.
 - Migrations.
-- Database changes.
 - Public login.
-- Email.
-- Payment.
+- Email sending.
+- Payment flow.
 - REST API.
 - Deployment.
+- Dependency changes.
 - Commit or push without authorization.

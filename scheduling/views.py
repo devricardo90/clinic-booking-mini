@@ -39,13 +39,14 @@ def appointment_new(request):
             client.is_active = True
             client.save()
 
-            Appointment.objects.create(
+            appointment = Appointment.objects.create(
                 client=client,
                 service=form.cleaned_data["service"],
                 professional=form.cleaned_data["professional"],
                 scheduled_for=form.cleaned_data["scheduled_for"],
                 status=Appointment.Status.SCHEDULED,
             )
+            request.session["last_appointment_id"] = appointment.id
             return redirect("appointment_success")
     else:
         form = AppointmentRequestForm()
@@ -54,4 +55,17 @@ def appointment_new(request):
 
 
 def appointment_success(request):
-    return render(request, "scheduling/appointment_success.html")
+    appointment = None
+    appointment_id = request.session.get("last_appointment_id")
+    if appointment_id:
+        appointment = (
+            Appointment.objects.select_related("client", "service", "professional")
+            .filter(id=appointment_id)
+            .first()
+        )
+
+    return render(
+        request,
+        "scheduling/appointment_success.html",
+        {"appointment": appointment},
+    )

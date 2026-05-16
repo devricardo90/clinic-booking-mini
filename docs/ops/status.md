@@ -2,30 +2,29 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-011
+Task: CBM-012
 
 State: REVIEW
 
 READY:
 
-CBM-001 through CBM-010: Remote DONE
+CBM-001 through CBM-011: Remote DONE
 
-CBM-011 Local DONE: not declared
+CBM-012 Local DONE: not declared
 
-CBM-011 Remote DONE: not declared
+CBM-012 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-011 improves Django Admin review of public appointment requests.
+CBM-012 improves the end-to-end appointment request lifecycle while staying on the existing schema.
 
 Implemented scope:
 
-- Useful appointment request columns in `AppointmentAdmin`.
-- Filters by status, scheduled date, service, and professional.
-- Search by client name, client phone, client email, service, and professional.
-- Ordering by scheduled date and creation date.
-- `date_hierarchy` for scheduled date navigation.
-- Fieldsets for appointment request data and audit data.
+- Public request validation remains active.
+- Created appointment is stored in the session for the success page.
+- Success page displays client, service, professional, scheduled time, and status.
+- Admin can move appointment requests between `SCHEDULED` and `CANCELED` using admin actions.
+- Tests cover confirmation display and admin status transitions.
 
 ## Validation State
 
@@ -40,15 +39,19 @@ Validation evidence is collected in the session output:
 
 - No model changes.
 - No migrations.
-- No database changes.
-- No global settings changes.
-- No templates, public views, forms, or URLs changed.
-- No public login, email, payment, API, deploy, seed, commit, or push.
+- No public login.
+- No email sending.
+- No payment flow.
+- No REST API.
+- No deployment.
+- No dependency changes.
+- No commit.
+- No push.
 
 ## Review State
 
-CBM-011 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
+CBM-012 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
 
 READY remains empty.
 
-CBM-012 remains not started and not opened.
+CBM-013 remains not started and not opened.

@@ -57,6 +57,34 @@
             line-height: 1.55;
         }
 
+        .summary {
+            display: grid;
+            gap: 12px;
+            margin: 24px 0 0;
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+        }
+
+        .summary div {
+            display: grid;
+            gap: 4px;
+        }
+
+        .summary dt {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .summary dd {
+            margin: 0;
+            color: var(--ink);
+            font-size: 16px;
+        }
+
         .actions {
             display: flex;
             flex-wrap: wrap;
@@ -96,8 +124,32 @@
         <section class="panel">
             <h1>Appointment Request Received</h1>
             <p>
-                Your appointment request was saved in the local MVP database. Clinic staff can review it in Django Admin.
+                Your appointment request was saved. Clinic staff can review and update its operational status in Django Admin.
             </p>
+            {% if appointment %}
+                <dl class="summary" aria-label="Appointment request summary">
+                    <div>
+                        <dt>Client</dt>
+                        <dd>{{ appointment.client.full_name }}</dd>
+                    </div>
+                    <div>
+                        <dt>Service</dt>
+                        <dd>{{ appointment.service.name }}</dd>
+                    </div>
+                    <div>
+                        <dt>Professional</dt>
+                        <dd>{{ appointment.professional.full_name }}</dd>
+                    </div>
+                    <div>
+                        <dt>Scheduled for</dt>
+                        <dd>{{ appointment.scheduled_for|date:"M j, Y H:i" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Status</dt>
+                        <dd>{{ appointment.get_status_display }}</dd>
+                    </div>
+                </dl>
+            {% endif %}
             <div class="actions">
                 <a class="primary" href="{% url 'home' %}">Back to Overview</a>
                 <a class="secondary" href="/admin/">Open Admin Dashboard</a>

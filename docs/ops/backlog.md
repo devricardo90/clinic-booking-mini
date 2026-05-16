@@ -14,21 +14,22 @@ Project: Clinic Booking Mini
 - CBM-008: Implement minimal public appointment request flow.
 - CBM-009: Add appointment conflict guard.
 - CBM-010: Add appointment request time guard.
+- CBM-011: Add appointment request admin review flow.
 
 ## REVIEW
 
-- CBM-011: Add appointment request admin review flow.
+- CBM-012: Implement End-to-End Appointment Request Lifecycle.
 
 ## READY
 
 ## NOT STARTED
 
-- CBM-012: Not opened. Requires explicit Trigger approval.
+- CBM-013: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
-READY intentionally remains empty for CBM-011.
+READY intentionally remains empty for CBM-012.
 
-CBM-011 Local DONE is not declared.
+CBM-012 Local DONE is not declared.
 
-CBM-011 Remote DONE is not declared.
+CBM-012 Remote DONE is not declared.

@@ -1,9 +1,12 @@
 from datetime import datetime, timedelta
+from unittest.mock import Mock
 
+from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
+from .admin import AppointmentAdmin
 from .models import Appointment, Client, Professional, Service
 
 
@@ -103,3 +106,55 @@ class PublicAppointmentRequestTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["Location"], reverse("appointment_success"))
         self.assertEqual(Appointment.objects.count(), 2)
+
+    def test_success_page_shows_created_request_summary(self):
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(self.scheduled_for + timedelta(hours=2)),
+            follow=True,
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Appointment Request Received")
+        self.assertContains(response, "Public Request Client")
+        self.assertContains(response, "Initial evaluation")
+        self.assertContains(response, "Dr. Ana Silva")
+        self.assertContains(response, "Scheduled")
+
+
+class AppointmentAdminLifecycleTests(TestCase):
+    def setUp(self):
+        self.service = Service.objects.create(name="Initial evaluation", duration_minutes=45)
+        self.professional = Professional.objects.create(full_name="Dr. Ana Silva", role="Dentist")
+        self.client_record = Client.objects.create(
+            full_name="Admin Review Client",
+            phone="+1 555 0100",
+            email="admin.review@example.com",
+        )
+        self.appointment = Appointment.objects.create(
+            client=self.client_record,
+            service=self.service,
+            professional=self.professional,
+            scheduled_for=timezone.make_aware(datetime(2030, 3, 4, 9, 0)),
+            status=Appointment.Status.SCHEDULED,
+        )
+        self.admin = AppointmentAdmin(Appointment, AdminSite())
+        self.admin.message_user = Mock()
+        self.request = Mock()
+
+    def test_admin_can_mark_appointment_request_canceled(self):
+        self.admin.mark_canceled(self.request, Appointment.objects.filter(id=self.appointment.id))
+
+        self.appointment.refresh_from_db()
+        self.assertEqual(self.appointment.status, Appointment.Status.CANCELED)
+        self.admin.message_user.assert_called_once()
+
+    def test_admin_can_mark_appointment_request_scheduled(self):
+        self.appointment.status = Appointment.Status.CANCELED
+        self.appointment.save()
+
+        self.admin.mark_scheduled(self.request, Appointment.objects.filter(id=self.appointment.id))
+
+        self.appointment.refresh_from_db()
+        self.assertEqual(self.appointment.status, Appointment.Status.SCHEDULED)
+        self.admin.message_user.assert_called_once()

@@ -53,6 +53,7 @@ class AppointmentAdmin(admin.ModelAdmin):
     ordering = ("scheduled_for", "created_at")
     readonly_fields = ("created_at", "updated_at")
     date_hierarchy = "scheduled_for"
+    actions = ("mark_scheduled", "mark_canceled")
     fieldsets = (
         (
             "Appointment request",
@@ -81,3 +82,13 @@ class AppointmentAdmin(admin.ModelAdmin):
     @admin.display(description="Email")
     def client_email(self, obj):
         return obj.client.email
+
+    @admin.action(description="Mark selected appointments as scheduled")
+    def mark_scheduled(self, request, queryset):
+        updated = queryset.update(status=Appointment.Status.SCHEDULED)
+        self.message_user(request, f"{updated} appointment request(s) marked as scheduled.")
+
+    @admin.action(description="Mark selected appointments as canceled")
+    def mark_canceled(self, request, queryset):
+        updated = queryset.update(status=Appointment.Status.CANCELED)
+        self.message_user(request, f"{updated} appointment request(s) marked as canceled.")
