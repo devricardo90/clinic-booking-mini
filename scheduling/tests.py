@@ -48,6 +48,52 @@ class PublicAppointmentRequestTests(TestCase):
         )
         self.assertEqual(Appointment.objects.count(), 1)
 
+    def test_public_request_blocks_past_datetime(self):
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(timezone.now() - timedelta(days=1)),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Appointments cannot be scheduled in the past.")
+        self.assertEqual(Appointment.objects.count(), 1)
+
+    def test_public_request_blocks_weekend(self):
+        saturday = timezone.make_aware(datetime(2030, 3, 2, 9, 0))
+
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(saturday),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Appointments can only be scheduled Monday through Friday.")
+        self.assertEqual(Appointment.objects.count(), 1)
+
+    def test_public_request_blocks_before_opening_time(self):
+        before_opening = timezone.make_aware(datetime(2030, 3, 4, 7, 30))
+
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(before_opening),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Appointments cannot start before 08:00.")
+        self.assertEqual(Appointment.objects.count(), 1)
+
+    def test_public_request_blocks_when_service_ends_after_closing_time(self):
+        late_start = timezone.make_aware(datetime(2030, 3, 4, 17, 30))
+
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(late_start),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Appointments must finish by 18:00.")
+        self.assertEqual(Appointment.objects.count(), 1)
+
     def test_public_request_allows_same_professional_different_datetime(self):
         response = self.client.post(
             reverse("appointment_new"),

@@ -4,38 +4,42 @@ Project: Clinic Booking Mini
 
 Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runtime:latest`
 
-Current item: CBM-009
+Current item: CBM-010
 
 Current state: REVIEW
 
 READY:
 
-CBM-001 through CBM-008: Remote DONE
+CBM-001 through CBM-009: Remote DONE
 
-CBM-009 Local DONE: not declared
+CBM-010 Local DONE: not declared
 
-CBM-009 Remote DONE: not declared
+CBM-010 Remote DONE: not declared
 
 ## Summary
 
-CBM-009 adds a basic appointment conflict guard to the public appointment request flow.
+CBM-010 adds a public appointment request time guard.
 
 Implemented scope:
 
-- Public form validation blocks a new appointment when the selected professional already has an appointment at the same date and time.
-- The user sees a clear error message in the existing public form.
-- The public flow still allows the same professional at a different time.
-- Focused automated tests cover the blocked duplicate and allowed different-time cases.
+- Blocks appointments in the past.
+- Blocks Saturday and Sunday appointments.
+- Blocks appointments starting before 08:00.
+- Uses `Service.duration_minutes` to block appointments that finish after 18:00.
+- Keeps the CBM-009 same-professional/same-date-time conflict guard intact.
+- Adds focused tests for the time guard and existing conflict guard.
 
 ## Explicit Limits
 
 - No UI redesign.
 - No advanced calendar.
+- No per-professional availability.
 - No new admin panel.
 - No authentication.
 - No REST API.
 - No database schema changes or migrations.
+- No global settings changes.
 - No deployment.
 - No commit or push.
 
-CBM-010 remains not opened.
+CBM-011 remains not opened.

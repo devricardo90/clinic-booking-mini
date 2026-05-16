@@ -2,28 +2,30 @@
 
 Project: Clinic Booking Mini
 
-Task: CBM-009
+Task: CBM-010
 
 State: REVIEW
 
 READY:
 
-CBM-001 through CBM-008: Remote DONE
+CBM-001 through CBM-009: Remote DONE
 
-CBM-009 Local DONE: not declared
+CBM-010 Local DONE: not declared
 
-CBM-009 Remote DONE: not declared
+CBM-010 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-009 adds a basic conflict guard to the existing public appointment request flow.
+CBM-010 adds a simple operational time guard to the existing public appointment request flow.
 
 Implemented scope:
 
-- Validation blocks a request when an existing appointment has the same professional and the same scheduled date/time.
-- The existing public form displays a clear conflict message.
-- A different time for the same professional remains allowed.
-- Tests cover both paths.
+- Block scheduled times in the past.
+- Block Saturday and Sunday.
+- Block starts before 08:00.
+- Use `Service.duration_minutes` to block appointments ending after 18:00.
+- Keep the CBM-009 conflict guard active.
+- Add proportional automated tests.
 
 ## Validation State
 
@@ -38,6 +40,7 @@ Validation evidence is collected in the session output:
 
 - No UI redesign.
 - No advanced calendar.
+- No per-professional availability.
 - No new admin panel.
 - No authentication.
 - No REST API.
@@ -50,8 +53,8 @@ Validation evidence is collected in the session output:
 
 ## Review State
 
-CBM-009 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
+CBM-010 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
 
 READY remains empty.
 
-CBM-010 remains not started and not opened.
+CBM-011 remains not started and not opened.
