@@ -4,44 +4,45 @@ Project: Clinic Booking Mini
 
 Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runtime:latest`
 
-Last completed: CBM-013
+Last completed: CBM-014
 
-Current item: CBM-014
+Current item: CBM-015
 
 Current state: REVIEW
 
 READY:
 
-CBM-001 through CBM-013: Remote DONE
+CBM-001 through CBM-014: Remote DONE
 
-CBM-014 Local DONE: not declared
+CBM-015 Local DONE: not declared
 
-CBM-014 Remote DONE: not declared
+CBM-015 Remote DONE: not declared
 
 ## Summary
 
-CBM-014 creates the official appointment lifecycle documentation for the MVP, defining
-states, transitions, availability impact, responsibilities, and MVP boundaries before
-any future implementation.
+CBM-015 implements the basic appointment lifecycle actions following CBM-014.
 
 Implemented scope:
 
-- docs/product/appointment-lifecycle.md created.
-- States documented: SCHEDULED, CANCELED (current); PENDING, REJECTED (planned future).
-- Transitions, prohibited transitions, availability impact, and responsibility matrix defined.
-- MVP boundaries and future evolution notes documented.
+- Appointment.Status: added PENDING and REJECTED. Default changed to PENDING.
+- Migration 0002 created for model change.
+- Public form now creates Appointment in PENDING state.
+- Admin action confirm_pending: PENDING → SCHEDULED with conflict revalidation.
+- Admin action reject_pending: PENDING → REJECTED (only from PENDING; skips others).
+- Existing mark_scheduled and mark_canceled retained.
+- has_scheduling_conflict() extracted to forms.py for reuse by admin.
+- 18 tests pass (12 existing updated + 6 new).
 
 ## Explicit Limits
 
-- No model changes.
-- No migrations.
-- No code changes.
+- No email.
+- No notifications.
+- No patient portal.
 - No public login.
-- No email sending.
-- No payment flow.
 - No REST API.
+- No payment.
 - No deployment.
 - No dependency changes.
 - No commit or push without Trigger authorization.
 
-CBM-015 remains not opened.
+CBM-016 remains not opened.

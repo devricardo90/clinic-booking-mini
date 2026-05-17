@@ -44,7 +44,7 @@ def appointment_new(request):
                 service=form.cleaned_data["service"],
                 professional=form.cleaned_data["professional"],
                 scheduled_for=form.cleaned_data["scheduled_for"],
-                status=Appointment.Status.SCHEDULED,
+                status=Appointment.Status.PENDING,
             )
             request.session["last_appointment_id"] = appointment.id
             return redirect("appointment_success")

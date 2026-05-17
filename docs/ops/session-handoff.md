@@ -2,50 +2,60 @@
 
 Project: Clinic Booking Mini
 
-Last completed: CBM-013
+Last completed: CBM-014
 
-Current item: CBM-014
+Current item: CBM-015
 
 State: REVIEW
 
 ## Starting Point
 
-CBM-013 is Remote DONE at commit `0e71035`.
+CBM-014 is Remote DONE. docs/product/appointment-lifecycle.md exists and defines the
+official lifecycle: PENDING → SCHEDULED or REJECTED; SCHEDULED → CANCELED;
+only SCHEDULED blocks availability.
 
-The project has a public appointment request flow with overlap-aware availability guards,
-a success summary page, and admin lifecycle actions (mark_scheduled, mark_canceled).
-The `Appointment.Status` model has two values: SCHEDULED and CANCELED.
+The model before CBM-015 had: SCHEDULED, CANCELED (default: SCHEDULED).
 
 ## What Was Done
 
-CBM-014 creates the official appointment lifecycle documentation:
+CBM-015 implements the basic appointment lifecycle actions:
 
-- docs/product/appointment-lifecycle.md created.
-- Official states defined: SCHEDULED and CANCELED (current MVP); PENDING and REJECTED (planned future).
-- Transitions documented: public form → SCHEDULED; admin mark_canceled → CANCELED; admin mark_scheduled → SCHEDULED.
-- Prohibited transitions defined: SCHEDULED → REJECTED explicitly prohibited; CANCELED → REJECTED prohibited.
-- Availability impact documented: only SCHEDULED blocks availability and is checked by the conflict guard.
-- Responsibility matrix documented: public user submits; admin approves, cancels.
-- MVP boundaries documented: no patient confirmation, no direct rescheduling, no COMPLETED, no NO_SHOW.
-- Future evolution notes documented.
+- Appointment.Status: PENDING, SCHEDULED, CANCELED, REJECTED. Default: PENDING.
+- Migration 0002 created (AlterField: choices + default).
+- Public appointment_new: creates Appointment in PENDING.
+- has_scheduling_conflict() extracted into forms.py module scope (reused by admin).
+- Admin confirm_pending: PENDING → SCHEDULED with conflict revalidation at confirmation time.
+- Admin reject_pending: PENDING → REJECTED (skips non-PENDING with warning).
+- mark_scheduled (CANCELED → SCHEDULED) and mark_canceled unchanged.
+- 18 tests: 12 updated + 6 new. All passing.
+
+## Key Design Decisions
+
+- PENDING does not block availability (CBM-014: "To be defined"; task instruction: if only SCHEDULED
+  blocks, revalidate conflict on confirmation). Confirmed approach: PENDING does not block.
+- Conflict guard in the public form still runs against SCHEDULED (immediate UX feedback if slot taken).
+- Conflict is revalidated when admin confirms PENDING → SCHEDULED; confirmation fails if slot blocked.
+- SCHEDULED → REJECTED is prohibited by design: reject_pending skips non-PENDING appointments.
+- Templates unchanged: success page uses get_status_display(), which now shows "Pending".
 
 ## Important Boundary
 
-No code was changed. No model, form, view, admin, test, migration, template, or URL was altered.
-No COMPLETED or NO_SHOW states were introduced. No CBM-015 was opened.
+No email, notifications, patient portal, login, REST API, payment, or deployment.
+No COMPLETED or NO_SHOW states. No CBM-016 opened.
 No commit or push without Trigger authorization.
 
 ## Current State
 
-- CBM-014 is in REVIEW.
+- CBM-015 is in REVIEW.
 - READY is empty.
-- CBM-014 Local DONE is not declared.
-- CBM-014 Remote DONE is not declared.
-- No commit has been made for CBM-014.
-- No push has been made for CBM-014.
-- CBM-015 has not been opened.
+- CBM-015 Local DONE is not declared.
+- CBM-015 Remote DONE is not declared.
+- No commit has been made for CBM-015.
+- No push has been made for CBM-015.
+- CBM-016 has not been opened.
 
 ## Suggested Next Review
 
-Review docs/product/appointment-lifecycle.md for accuracy against the current model and
-admin actions before approving CBM-014 for Local DONE and a controlled commit.
+Review scheduling/models.py, scheduling/admin.py, scheduling/forms.py, scheduling/views.py,
+scheduling/tests.py, and migration 0002 before approving CBM-015 for Local DONE and a
+controlled commit.

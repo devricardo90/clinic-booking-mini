@@ -10,6 +10,26 @@ OPENING_TIME = time(8, 0)
 CLOSING_TIME = time(18, 0)
 
 
+def has_scheduling_conflict(professional, scheduled_for, service):
+    """Return True if scheduled_for overlaps any SCHEDULED appointment for the professional."""
+    new_start = scheduled_for
+    new_end = scheduled_for + timedelta(minutes=service.duration_minutes)
+    candidates = (
+        Appointment.objects.filter(
+            professional=professional,
+            status=Appointment.Status.SCHEDULED,
+            scheduled_for__lt=new_end,
+            scheduled_for__gte=new_start - timedelta(hours=8),
+        )
+        .select_related("service")
+    )
+    for appt in candidates:
+        appt_end = appt.scheduled_for + timedelta(minutes=appt.service.duration_minutes)
+        if appt_end > new_start:
+            return True
+    return False
+
+
 class AppointmentRequestForm(forms.Form):
     full_name = forms.CharField(max_length=120, label="Full name")
     phone = forms.CharField(max_length=30, required=False, label="Phone")
@@ -60,24 +80,10 @@ class AppointmentRequestForm(forms.Form):
                     errors.append("Appointments must finish by 18:00.")
 
         if professional and scheduled_for and service:
-            new_start = scheduled_for
-            new_end = scheduled_for + timedelta(minutes=service.duration_minutes)
-            candidates = (
-                Appointment.objects.filter(
-                    professional=professional,
-                    status=Appointment.Status.SCHEDULED,
-                    scheduled_for__lt=new_end,
-                    scheduled_for__gte=new_start - timedelta(hours=8),
+            if has_scheduling_conflict(professional, scheduled_for, service):
+                errors.append(
+                    "This time slot conflicts with an existing appointment for this professional."
                 )
-                .select_related("service")
-            )
-            for appt in candidates:
-                appt_end = appt.scheduled_for + timedelta(minutes=appt.service.duration_minutes)
-                if appt_end > new_start:
-                    errors.append(
-                        "This time slot conflicts with an existing appointment for this professional."
-                    )
-                    break
 
         if errors:
             raise forms.ValidationError(errors)

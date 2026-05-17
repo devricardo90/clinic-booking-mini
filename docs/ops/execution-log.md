@@ -57,12 +57,43 @@ Runtime context: `ric-orchestrator-runtime:latest`
 - Did not commit.
 - Did not push.
 
+## CBM-015
+
+- Started CBM-015 from CBM-014 Remote DONE.
+- Read docs/product/appointment-lifecycle.md, models.py, views.py, admin.py, forms.py, tests.py, and all templates before editing.
+- Confirmed existing states: SCHEDULED, CANCELED. Default: SCHEDULED.
+- Added PENDING and REJECTED to Appointment.Status. Changed default to PENDING.
+- Created migration 0002_appointment_add_pending_rejected_states (AlterField: choices + default).
+- Extracted has_scheduling_conflict() from forms.py clean() into module-level function.
+- Public appointment_new: changed status=SCHEDULED to status=PENDING at creation.
+- Admin confirm_pending action: PENDING → SCHEDULED with conflict revalidation.
+- Admin reject_pending action: PENDING → REJECTED (guards non-PENDING with warning).
+- Retained mark_scheduled (CANCELED → SCHEDULED) and mark_canceled without modification.
+- Updated actions tuple: confirm_pending, reject_pending, mark_scheduled, mark_canceled.
+- Updated test_public_request_allows_canceled_appointment_slot: assert PENDING count, not SCHEDULED.
+- Updated test_success_page_shows_created_request_summary: assert "Pending", not "Scheduled".
+- Added test_public_request_creates_appointment_in_pending_state.
+- Added test_admin_confirm_pending_transitions_to_scheduled.
+- Added test_admin_confirm_pending_blocked_when_slot_already_scheduled.
+- Added test_admin_reject_pending_transitions_to_rejected.
+- Added test_admin_reject_pending_skips_scheduled_appointments.
+- Added test_admin_confirm_pending_skips_non_pending_appointments.
+- Test count: 12 → 18, all passing.
+- python manage.py check: PASS.
+- python manage.py makemigrations --check --dry-run: No changes detected.
+- git diff --check: exit 0 (CRLF warnings only, Windows expected).
+- Did not alter templates.
+- Did not add email, notifications, patient portal, login, API, payment, or deployment.
+- Did not open CBM-016.
+- Did not commit.
+- Did not push.
+
 ## Current End State
 
-CBM-014 ends in REVIEW.
+CBM-015 ends in REVIEW.
 
 READY remains empty.
 
-CBM-014 Local DONE and Remote DONE are not declared.
+CBM-015 Local DONE and Remote DONE are not declared.
 
-CBM-015 remains not opened.
+CBM-016 remains not opened.

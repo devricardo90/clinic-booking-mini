@@ -81,7 +81,7 @@ class PublicAppointmentRequestTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(Appointment.objects.filter(status=A.Status.SCHEDULED).count(), 1)
+        self.assertEqual(Appointment.objects.filter(status=A.Status.PENDING).count(), 1)
 
     def test_public_request_allows_adjacent_slot_after_existing(self):
         # Existing: 09:00–09:45. New starts exactly at 09:45 — no overlap.
@@ -151,6 +151,16 @@ class PublicAppointmentRequestTests(TestCase):
         self.assertEqual(response["Location"], reverse("appointment_success"))
         self.assertEqual(Appointment.objects.count(), 2)
 
+    def test_public_request_creates_appointment_in_pending_state(self):
+        response = self.client.post(
+            reverse("appointment_new"),
+            data=self._post_data(self.scheduled_for + timedelta(hours=2)),
+        )
+
+        self.assertEqual(response.status_code, 302)
+        new_appt = Appointment.objects.order_by("-id").first()
+        self.assertEqual(new_appt.status, Appointment.Status.PENDING)
+
     def test_success_page_shows_created_request_summary(self):
         response = self.client.post(
             reverse("appointment_new"),
@@ -163,7 +173,7 @@ class PublicAppointmentRequestTests(TestCase):
         self.assertContains(response, "Public Request Client")
         self.assertContains(response, "Initial evaluation")
         self.assertContains(response, "Dr. Ana Silva")
-        self.assertContains(response, "Scheduled")
+        self.assertContains(response, "Pending")
 
 
 class AppointmentAdminLifecycleTests(TestCase):
@@ -202,3 +212,68 @@ class AppointmentAdminLifecycleTests(TestCase):
         self.appointment.refresh_from_db()
         self.assertEqual(self.appointment.status, Appointment.Status.SCHEDULED)
         self.admin.message_user.assert_called_once()
+
+    def test_admin_confirm_pending_transitions_to_scheduled(self):
+        pending = Appointment.objects.create(
+            client=self.client_record,
+            service=self.service,
+            professional=self.professional,
+            scheduled_for=timezone.make_aware(datetime(2030, 3, 4, 11, 0)),
+            status=Appointment.Status.PENDING,
+        )
+
+        self.admin.confirm_pending(self.request, Appointment.objects.filter(id=pending.id))
+
+        pending.refresh_from_db()
+        self.assertEqual(pending.status, Appointment.Status.SCHEDULED)
+
+    def test_admin_confirm_pending_blocked_when_slot_already_scheduled(self):
+        # Existing SCHEDULED appointment at 10:00 (45 min → ends 10:45).
+        Appointment.objects.create(
+            client=self.client_record,
+            service=self.service,
+            professional=self.professional,
+            scheduled_for=timezone.make_aware(datetime(2030, 3, 5, 10, 0)),
+            status=Appointment.Status.SCHEDULED,
+        )
+        # PENDING request for the same slot.
+        pending = Appointment.objects.create(
+            client=self.client_record,
+            service=self.service,
+            professional=self.professional,
+            scheduled_for=timezone.make_aware(datetime(2030, 3, 5, 10, 0)),
+            status=Appointment.Status.PENDING,
+        )
+
+        self.admin.confirm_pending(self.request, Appointment.objects.filter(id=pending.id))
+
+        pending.refresh_from_db()
+        self.assertEqual(pending.status, Appointment.Status.PENDING)
+
+    def test_admin_reject_pending_transitions_to_rejected(self):
+        pending = Appointment.objects.create(
+            client=self.client_record,
+            service=self.service,
+            professional=self.professional,
+            scheduled_for=timezone.make_aware(datetime(2030, 3, 4, 11, 0)),
+            status=Appointment.Status.PENDING,
+        )
+
+        self.admin.reject_pending(self.request, Appointment.objects.filter(id=pending.id))
+
+        pending.refresh_from_db()
+        self.assertEqual(pending.status, Appointment.Status.REJECTED)
+
+    def test_admin_reject_pending_skips_scheduled_appointments(self):
+        # self.appointment is SCHEDULED — reject_pending must not alter it.
+        self.admin.reject_pending(self.request, Appointment.objects.filter(id=self.appointment.id))
+
+        self.appointment.refresh_from_db()
+        self.assertEqual(self.appointment.status, Appointment.Status.SCHEDULED)
+
+    def test_admin_confirm_pending_skips_non_pending_appointments(self):
+        # self.appointment is SCHEDULED — confirm_pending must not alter it.
+        self.admin.confirm_pending(self.request, Appointment.objects.filter(id=self.appointment.id))
+
+        self.appointment.refresh_from_db()
+        self.assertEqual(self.appointment.status, Appointment.Status.SCHEDULED)

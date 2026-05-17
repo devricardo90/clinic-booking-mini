@@ -46,8 +46,10 @@ class Professional(models.Model):
 
 class Appointment(models.Model):
     class Status(models.TextChoices):
+        PENDING = "PENDING", "Pending"
         SCHEDULED = "SCHEDULED", "Scheduled"
         CANCELED = "CANCELED", "Canceled"
+        REJECTED = "REJECTED", "Rejected"
 
     client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name="appointments")
     service = models.ForeignKey(Service, on_delete=models.PROTECT, related_name="appointments")
@@ -60,7 +62,7 @@ class Appointment(models.Model):
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
-        default=Status.SCHEDULED,
+        default=Status.PENDING,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -17,21 +17,22 @@ Project: Clinic Booking Mini
 - CBM-011: Add appointment request admin review flow.
 - CBM-012: Implement End-to-End Appointment Request Lifecycle.
 - CBM-013: Implement Clinic Availability Guards. (commit 0e71035)
+- CBM-014: Document Appointment Lifecycle.
 
 ## REVIEW
 
-- CBM-014: Document Appointment Lifecycle.
+- CBM-015: Implement Basic Appointment Lifecycle Actions.
 
 ## READY
 
 ## NOT STARTED
 
-- CBM-015: Not opened. Requires explicit Trigger approval.
+- CBM-016: Not opened. Requires explicit Trigger approval.
 
 ## Notes
 
 READY is empty. No new task has been opened.
 
-CBM-014 Local DONE is not declared.
+CBM-015 Local DONE is not declared.
 
-CBM-014 Remote DONE is not declared.
+CBM-015 Remote DONE is not declared.
