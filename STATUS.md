@@ -4,45 +4,45 @@ Project: Clinic Booking Mini
 
 Runtime context: official RIC Local Orchestrator runtime, `ric-orchestrator-runtime:latest`
 
-Last completed: CBM-014
+Last completed: CBM-015 (commit 06664b0)
 
-Current item: CBM-015
+Current item: CBM-016
 
-Current state: REVIEW
+Current state: READY
 
-READY:
+READY: CBM-016 — Improve Appointment Admin Visibility After Lifecycle
 
-CBM-001 through CBM-014: Remote DONE
+CBM-001 through CBM-015: Remote DONE
 
-CBM-015 Local DONE: not declared
+CBM-016 Local DONE: not declared
 
-CBM-015 Remote DONE: not declared
+CBM-016 Remote DONE: not declared
 
 ## Summary
 
-CBM-015 implements the basic appointment lifecycle actions following CBM-014.
+CBM-016 will improve AppointmentAdmin visibility after the lifecycle actions introduced
+in CBM-015. The admin list currently shows limited fields and does not surface PENDING or
+REJECTED statuses clearly for the operator.
 
-Implemented scope:
+Authorized implementation scope (execution pending):
 
-- Appointment.Status: added PENDING and REJECTED. Default changed to PENDING.
-- Migration 0002 created for model change.
-- Public form now creates Appointment in PENDING state.
-- Admin action confirm_pending: PENDING → SCHEDULED with conflict revalidation.
-- Admin action reject_pending: PENDING → REJECTED (only from PENDING; skips others).
-- Existing mark_scheduled and mark_canceled retained.
-- has_scheduling_conflict() extracted to forms.py for reuse by admin.
-- 18 tests pass (12 existing updated + 6 new).
+- Improve AppointmentAdmin list_display with status, client, service, professional, datetime.
+- Add list_filter by status, service, professional, and date.
+- Add or extend search_fields using existing model fields only.
+- Preserve all existing lifecycle actions (confirm_pending, reject_pending, mark_scheduled, mark_canceled).
+- Update operational docs on completion.
 
 ## Explicit Limits
 
+- No model changes.
+- No migrations.
+- No forms.py changes.
+- No views.py changes.
+- No availability rule changes.
+- No public frontend.
 - No email.
-- No notifications.
-- No patient portal.
-- No public login.
-- No REST API.
-- No payment.
+- No authentication.
 - No deployment.
-- No dependency changes.
 - No commit or push without Trigger authorization.
 
-CBM-016 remains not opened.
+CBM-017 remains not opened.

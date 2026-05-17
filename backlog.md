@@ -16,25 +16,27 @@
 - CBM-012: Implement End-to-End Appointment Request Lifecycle.
 - CBM-013: Implement Clinic Availability Guards. (commit 0e71035)
 - CBM-014: Document Appointment Lifecycle.
+- CBM-015: Implement Basic Appointment Lifecycle Actions. (commit 06664b0)
 
 ## REVIEW
 
-- CBM-015: Implement Basic Appointment Lifecycle Actions.
-
 ## READY
+
+- CBM-016: Improve Appointment Admin Visibility After Lifecycle.
 
 ## FUTURE
 
-- CBM-016: Not opened. Requires explicit Trigger approval.
+- CBM-017: Not opened. Requires explicit Trigger approval.
 - Add email, payment, API, public login, or deployment only after explicit approval for a later task.
 
-## BLOCKED / OUT OF SCOPE FOR CBM-015
+## BLOCKED / OUT OF SCOPE FOR CBM-016
 
+- Model changes.
+- Migrations.
+- Forms or views changes.
+- Availability rule changes.
+- Public frontend.
 - Email and notifications.
-- Patient portal.
-- Public login.
-- REST API.
-- Payment.
+- Authentication.
 - Deployment.
-- Dependency changes.
 - Commit or push without Trigger authorization.

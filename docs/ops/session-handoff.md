@@ -2,60 +2,51 @@
 
 Project: Clinic Booking Mini
 
-Last completed: CBM-014
+Last completed: CBM-015 (commit 06664b0)
 
-Current item: CBM-015
+Current item: CBM-016
 
-State: REVIEW
+State: READY
 
 ## Starting Point
 
-CBM-014 is Remote DONE. docs/product/appointment-lifecycle.md exists and defines the
-official lifecycle: PENDING → SCHEDULED or REJECTED; SCHEDULED → CANCELED;
-only SCHEDULED blocks availability.
+CBM-015 is Remote DONE at commit 06664b0 on origin/main.
 
-The model before CBM-015 had: SCHEDULED, CANCELED (default: SCHEDULED).
+Current model: Appointment.Status has PENDING, SCHEDULED, CANCELED, REJECTED. Default: PENDING.
+Admin actions: confirm_pending, reject_pending, mark_scheduled, mark_canceled.
+scheduling/admin.py currently has limited list_display and does not surface PENDING/REJECTED
+statuses clearly for the operator after the lifecycle changes introduced in CBM-015.
 
-## What Was Done
+## What CBM-016 Should Do
 
-CBM-015 implements the basic appointment lifecycle actions:
+Improve AppointmentAdmin visibility only. Scope is limited to scheduling/admin.py.
 
-- Appointment.Status: PENDING, SCHEDULED, CANCELED, REJECTED. Default: PENDING.
-- Migration 0002 created (AlterField: choices + default).
-- Public appointment_new: creates Appointment in PENDING.
-- has_scheduling_conflict() extracted into forms.py module scope (reused by admin).
-- Admin confirm_pending: PENDING → SCHEDULED with conflict revalidation at confirmation time.
-- Admin reject_pending: PENDING → REJECTED (skips non-PENDING with warning).
-- mark_scheduled (CANCELED → SCHEDULED) and mark_canceled unchanged.
-- 18 tests: 12 updated + 6 new. All passing.
-
-## Key Design Decisions
-
-- PENDING does not block availability (CBM-014: "To be defined"; task instruction: if only SCHEDULED
-  blocks, revalidate conflict on confirmation). Confirmed approach: PENDING does not block.
-- Conflict guard in the public form still runs against SCHEDULED (immediate UX feedback if slot taken).
-- Conflict is revalidated when admin confirms PENDING → SCHEDULED; confirmation fails if slot blocked.
-- SCHEDULED → REJECTED is prohibited by design: reject_pending skips non-PENDING appointments.
-- Templates unchanged: success page uses get_status_display(), which now shows "Pending".
+- Improve list_display: include status, client, service, professional, scheduled_for, created_at.
+- Add list_filter by status and by existing FK fields (service, professional) and date.
+- Add or extend search_fields using existing model fields only.
+- Preserve all lifecycle actions: confirm_pending, reject_pending, mark_scheduled, mark_canceled.
+- No changes to list elsewhere.
 
 ## Important Boundary
 
-No email, notifications, patient portal, login, REST API, payment, or deployment.
-No COMPLETED or NO_SHOW states. No CBM-016 opened.
-No commit or push without Trigger authorization.
+- Do not alter models.py.
+- Do not create migrations.
+- Do not alter forms.py or views.py.
+- Do not alter availability rules.
+- Do not create public frontend, email, authentication, or deployment.
+- Stop in REVIEW after implementation. No commit or push without Trigger authorization.
 
 ## Current State
 
-- CBM-015 is in REVIEW.
-- READY is empty.
-- CBM-015 Local DONE is not declared.
-- CBM-015 Remote DONE is not declared.
-- No commit has been made for CBM-015.
-- No push has been made for CBM-015.
-- CBM-016 has not been opened.
+- CBM-016 is READY.
+- Discussion Gate approved by Trigger/Ricardo.
+- CBM-016 Local DONE is not declared.
+- CBM-016 Remote DONE is not declared.
+- No commit has been made for CBM-016.
+- CBM-017 has not been opened.
 
-## Suggested Next Review
+## Executor Instructions
 
-Review scheduling/models.py, scheduling/admin.py, scheduling/forms.py, scheduling/views.py,
-scheduling/tests.py, and migration 0002 before approving CBM-015 for Local DONE and a
-controlled commit.
+Read scheduling/admin.py before editing. Implement only the authorized scope above.
+Run python manage.py check, python manage.py test, python manage.py makemigrations --check --dry-run,
+git diff --check, git status and git diff --stat before reporting. Stop in REVIEW.

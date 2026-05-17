@@ -90,10 +90,15 @@ Runtime context: `ric-orchestrator-runtime:latest`
 
 ## Current End State
 
-CBM-015 ends in REVIEW.
+CBM-015 is Remote DONE at commit 06664b0.
 
-READY remains empty.
+## CBM-016 READY Promotion
 
-CBM-015 Local DONE and Remote DONE are not declared.
-
-CBM-016 remains not opened.
+- CBM-015 confirmed Remote DONE at commit 06664b0 on origin/main.
+- Working tree was clean before promotion. HEAD == origin/main == 06664b0.
+- Discussion Gate for CBM-016 approved by Trigger/Ricardo.
+- Note: RIC Local Orchestrator overblocked twice during CBM-016 gate, confusing READY Gate
+  with REVIEW/Commit Gate. Trigger approved manually.
+- CBM-016 promoted to READY: Improve Appointment Admin Visibility After Lifecycle.
+- No code altered. No commit. No push.
+- CBM-017 remains not opened.

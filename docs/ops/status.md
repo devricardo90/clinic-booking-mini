@@ -2,58 +2,49 @@
 
 Project: Clinic Booking Mini
 
-Last completed: CBM-014
+Last completed: CBM-015 (commit 06664b0)
 
-Current item: CBM-015
+Current item: CBM-016
 
-State: REVIEW
+State: READY
 
-READY:
+READY: CBM-016 — Improve Appointment Admin Visibility After Lifecycle
 
-CBM-001 through CBM-014: Remote DONE
+CBM-001 through CBM-015: Remote DONE
 
-CBM-015 Local DONE: not declared
+CBM-016 Local DONE: not declared
 
-CBM-015 Remote DONE: not declared
+CBM-016 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-015 implements the basic appointment lifecycle actions following CBM-014.
+CBM-016 will improve AppointmentAdmin visibility after the lifecycle actions introduced in CBM-015.
 
-Implemented scope:
+Authorized implementation scope (execution pending):
 
-- Appointment.Status: added PENDING and REJECTED. Default changed to PENDING.
-- Migration 0002 created (AlterField: choices and default).
-- Public appointment_new view: creates Appointment in PENDING (was SCHEDULED).
-- has_scheduling_conflict() extracted to forms.py for reuse.
-- Admin action confirm_pending: PENDING → SCHEDULED with conflict revalidation.
-- Admin action reject_pending: PENDING → REJECTED (guards against non-PENDING).
-- Existing mark_scheduled (CANCELED → SCHEDULED) and mark_canceled retained.
-- Tests: 18 total (12 existing updated/passing + 6 new).
-
-## Validation State
-
-- python manage.py check — PASS (0 issues)
-- python manage.py test — PASS (18/18)
-- python manage.py makemigrations --check --dry-run — No changes detected
-- git diff --check — PASS (exit 0, CRLF warnings only)
+- Improve AppointmentAdmin list_display: status, client, service, professional, datetime.
+- Add list_filter by status and by existing FK fields (service, professional) and date.
+- Add or extend search_fields using existing model fields only.
+- Preserve all lifecycle actions (confirm_pending, reject_pending, mark_scheduled, mark_canceled).
+- Update operational docs on completion.
 
 ## Explicit Limits
 
+- No model changes.
+- No migrations.
+- No forms.py changes.
+- No views.py changes.
+- No availability rule changes.
+- No public frontend.
 - No email.
-- No notifications.
-- No patient portal.
-- No public login.
-- No REST API.
-- No payment.
+- No authentication.
 - No deployment.
 - No dependency changes.
 - No commit or push without Trigger authorization.
 
-## Review State
+## READY Gate
 
-CBM-015 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
+CBM-016 is READY. Discussion Gate approved by Trigger/Ricardo.
+Executor may proceed to implementation. Stop in REVIEW after implementation.
 
-READY remains empty.
-
-CBM-016 remains not opened.
+CBM-017 remains not opened.
