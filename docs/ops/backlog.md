@@ -22,9 +22,9 @@ Project: Clinic Booking Mini
 
 ## REVIEW
 
-## READY
-
 - CBM-016: Improve Appointment Admin Visibility After Lifecycle.
+
+## READY
 
 ## NOT STARTED
 
@@ -32,7 +32,7 @@ Project: Clinic Booking Mini
 
 ## Notes
 
-CBM-016 is READY. Discussion Gate approved by Trigger/Ricardo.
+READY is empty.
 
 CBM-016 Local DONE is not declared.
 

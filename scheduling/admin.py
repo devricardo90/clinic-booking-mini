@@ -34,16 +34,17 @@ class ProfessionalAdmin(admin.ModelAdmin):
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = (
-        "scheduled_for",
         "status",
+        "scheduled_for",
         "client",
-        "client_phone",
-        "client_email",
         "service",
         "professional",
+        "client_phone",
+        "client_email",
         "created_at",
     )
-    list_filter = ("status", "scheduled_for", "service", "professional")
+    list_display_links = ("scheduled_for",)
+    list_filter = ("status", "service", "professional", "scheduled_for")
     search_fields = (
         "client__full_name",
         "client__phone",
@@ -51,7 +52,7 @@ class AppointmentAdmin(admin.ModelAdmin):
         "service__name",
         "professional__full_name",
     )
-    ordering = ("scheduled_for", "created_at")
+    ordering = ("-created_at",)
     readonly_fields = ("created_at", "updated_at")
     date_hierarchy = "scheduled_for"
     actions = ("confirm_pending", "reject_pending", "mark_scheduled", "mark_canceled")

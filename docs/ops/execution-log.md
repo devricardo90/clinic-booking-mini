@@ -102,3 +102,31 @@ CBM-015 is Remote DONE at commit 06664b0.
 - CBM-016 promoted to READY: Improve Appointment Admin Visibility After Lifecycle.
 - No code altered. No commit. No push.
 - CBM-017 remains not opened.
+
+## CBM-016
+
+- Started CBM-016 from CBM-015 Remote DONE at commit 06664b0. Working tree clean.
+- Read scheduling/admin.py and scheduling/models.py before editing.
+- Confirmed: admin already had all required columns, filters, and search_fields from prior CBMs.
+- Identified gap: status column was second in list_display; PENDING/REJECTED not immediately visible during triage.
+- Reordered list_display: status promoted to first column.
+- Column order: status, scheduled_for, client, service, professional, client_phone, client_email, created_at.
+- Added list_display_links = ("scheduled_for",): explicit clickable link; previously defaulted to first column.
+- Reordered list_filter: status first (was already present), then service, professional, scheduled_for.
+- search_fields unchanged: client__full_name, client__phone, client__email, service__name, professional__full_name.
+- ordering changed: -created_at (newest first, improves PENDING triage workflow; was scheduled_for, created_at).
+- All 4 lifecycle actions preserved: confirm_pending, reject_pending, mark_scheduled, mark_canceled.
+- Did not alter models.py, forms.py, views.py, templates, or migrations.
+- Did not open CBM-017.
+- Did not commit.
+- Did not push.
+
+## Current End State
+
+CBM-016 ends in REVIEW.
+
+READY remains empty.
+
+CBM-016 Local DONE and Remote DONE are not declared.
+
+CBM-017 remains not opened.

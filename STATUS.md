@@ -8,9 +8,9 @@ Last completed: CBM-015 (commit 06664b0)
 
 Current item: CBM-016
 
-Current state: READY
+Current state: REVIEW
 
-READY: CBM-016 — Improve Appointment Admin Visibility After Lifecycle
+READY:
 
 CBM-001 through CBM-015: Remote DONE
 
@@ -20,17 +20,17 @@ CBM-016 Remote DONE: not declared
 
 ## Summary
 
-CBM-016 will improve AppointmentAdmin visibility after the lifecycle actions introduced
-in CBM-015. The admin list currently shows limited fields and does not surface PENDING or
-REJECTED statuses clearly for the operator.
+CBM-016 improved AppointmentAdmin visibility after the lifecycle actions introduced in CBM-015.
 
-Authorized implementation scope (execution pending):
+Implemented scope:
 
-- Improve AppointmentAdmin list_display with status, client, service, professional, datetime.
-- Add list_filter by status, service, professional, and date.
-- Add or extend search_fields using existing model fields only.
-- Preserve all existing lifecycle actions (confirm_pending, reject_pending, mark_scheduled, mark_canceled).
-- Update operational docs on completion.
+- list_display reordered: status promoted to first column for immediate lifecycle triage.
+- list_display column order: status, scheduled_for, client, service, professional, client_phone, client_email, created_at.
+- list_display_links added explicitly: scheduled_for is the clickable link column.
+- list_filter reordered: status, service, professional, scheduled_for.
+- search_fields unchanged: already comprehensive (client name/phone/email, service name, professional name).
+- ordering changed: -created_at (newest requests first, better for PENDING triage workflow).
+- All 4 lifecycle actions preserved: confirm_pending, reject_pending, mark_scheduled, mark_canceled.
 
 ## Explicit Limits
 

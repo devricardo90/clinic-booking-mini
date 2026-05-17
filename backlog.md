@@ -20,9 +20,9 @@
 
 ## REVIEW
 
-## READY
-
 - CBM-016: Improve Appointment Admin Visibility After Lifecycle.
+
+## READY
 
 ## FUTURE
 

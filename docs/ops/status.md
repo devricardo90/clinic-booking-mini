@@ -6,9 +6,9 @@ Last completed: CBM-015 (commit 06664b0)
 
 Current item: CBM-016
 
-State: READY
+State: REVIEW
 
-READY: CBM-016 — Improve Appointment Admin Visibility After Lifecycle
+READY:
 
 CBM-001 through CBM-015: Remote DONE
 
@@ -18,15 +18,23 @@ CBM-016 Remote DONE: not declared
 
 ## Current Scope
 
-CBM-016 will improve AppointmentAdmin visibility after the lifecycle actions introduced in CBM-015.
+CBM-016 improved AppointmentAdmin visibility after the lifecycle actions introduced in CBM-015.
 
-Authorized implementation scope (execution pending):
+Implemented scope:
 
-- Improve AppointmentAdmin list_display: status, client, service, professional, datetime.
-- Add list_filter by status and by existing FK fields (service, professional) and date.
-- Add or extend search_fields using existing model fields only.
-- Preserve all lifecycle actions (confirm_pending, reject_pending, mark_scheduled, mark_canceled).
-- Update operational docs on completion.
+- list_display reordered: status first, then scheduled_for, client, service, professional, client_phone, client_email, created_at.
+- list_display_links = ("scheduled_for",) — explicit clickable link column.
+- list_filter reordered: status, service, professional, scheduled_for.
+- search_fields unchanged: already covers client name/phone/email, service name, professional name.
+- ordering changed to -created_at (newest requests first; improves PENDING triage workflow).
+- All 4 lifecycle actions preserved: confirm_pending, reject_pending, mark_scheduled, mark_canceled.
+
+## Validation State
+
+- python manage.py check — PASS (0 issues)
+- python manage.py test — PASS (18/18)
+- python manage.py makemigrations --check --dry-run — No changes detected
+- git diff --check — PASS (exit 0, CRLF warnings only)
 
 ## Explicit Limits
 
@@ -42,9 +50,10 @@ Authorized implementation scope (execution pending):
 - No dependency changes.
 - No commit or push without Trigger authorization.
 
-## READY Gate
+## Review State
 
-CBM-016 is READY. Discussion Gate approved by Trigger/Ricardo.
-Executor may proceed to implementation. Stop in REVIEW after implementation.
+CBM-016 remains in REVIEW until the Trigger approves Local DONE and any controlled commit.
+
+READY remains empty.
 
 CBM-017 remains not opened.
